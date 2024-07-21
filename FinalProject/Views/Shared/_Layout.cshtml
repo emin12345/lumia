@@ -1,0 +1,468 @@
+﻿@inject FinalProject.Services.LayoutService layoutService
+@using FinalProject.Entities;
+
+<!DOCTYPE html>
+<html lang="en">
+    @{
+    var sizecolor = ViewBag.SizeColor as List<Product>;
+
+    }
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css" integrity="sha512-SzlrxWUlpfuzQ+pcUCosxcglQRNAq/DZjVsC0lE40xsADsfeQoEypE+enwcOiGjk/bSuGGKHEyjSoQ1zVisanQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
+
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
+    <link rel="stylesheet" href="~/css/owl.carousel.min.css">
+    <link rel="stylesheet" href="~/css/owl.theme.default.min.css">
+    <link rel="stylesheet" href="~/css/layout.css">
+    <link rel="stylesheet" href="~/css/index.css">
+
+    <link rel="shortcut icon" href="~/images/header/headerlogo.svg" />
+</head>
+<style>
+    progress::-webkit-progress-value {
+        background: linear-gradient(to right, #aaffa9, #11ffbd);
+    }
+
+</style>
+<body>
+    <header>
+        <nav>
+            <div class="container">
+                <div class="row">
+                    <div class="navbar">
+                        <div class="col-lg-3">
+                            <a asp-controller="Home" asp-action="Index">
+                                <img src="~/images/header/headerblack.svg">
+                            </a>
+
+                        </div>
+                        <div id="navlinks" class="col-lg-6">
+                            <ul class="menu" style="list-style-type: none;">
+                                <li>
+                                    <a asp-controller="Home" asp-action="Index">Home</a>
+
+                                </li>
+                                <li><a asp-action="Index" asp-controller="Shop" asp-route-filter="men">Men</a></li>
+                                <li><a asp-action="Index" asp-controller="Shop" asp-route-filter="women">Women</a></li>
+                                <li><a asp-controller="Contact" asp-action="Index">Contact Us</a></li>
+                                <li><a asp-controller="Shop" asp-action="Index">Shop</a></li>
+                                <li><a asp-controller="AboutUs" asp-action="Index">About Us</a></li
+
+                            </ul>
+                        </div>
+                        <div class="col-lg-3">
+                            <ul style="list-style-type: none;">
+                                <li>
+                                    <svg width="20" height="20" class="menu-hamburger" viewBox="0 0 34 19" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <path fill-rule="evenodd" clip-rule="evenodd" d="M1.61863 0C1.11894 0 0.713867 0.405076 0.713867 0.904762C0.713867 1.40445 1.11894 1.80952 1.61863 1.80952H32.3805C32.8802 1.80952 33.2853 1.40445 33.2853 0.904762C33.2853 0.405076 32.8802 0 32.3805 0H1.61863ZM1.61863 17.1905C1.11894 17.1905 0.713867 17.5956 0.713867 18.0952C0.713867 18.5949 1.11894 19 1.61863 19H32.3805C32.8802 19 33.2853 18.5949 33.2853 18.0952C33.2853 17.5956 32.8802 17.1905 32.3805 17.1905H1.61863ZM0.713867 9.95238C0.713867 9.45269 1.11894 9.04762 1.61863 9.04762H19.7139C20.2136 9.04762 20.6186 9.45269 20.6186 9.95238C20.6186 10.4521 20.2136 10.8571 19.7139 10.8571H1.61863C1.11894 10.8571 0.713867 10.4521 0.713867 9.95238ZM24.2377 9.04762C23.738 9.04762 23.3329 9.45269 23.3329 9.95238C23.3329 10.4521 23.738 10.8571 24.2377 10.8571H26.952C27.4517 10.8571 27.8567 10.4521 27.8567 9.95238C27.8567 9.45269 27.4516 9.04762 26.952 9.04762H24.2377Z" fill="black"></path>
+                                    </svg>
+
+                                </li>
+                                <li>
+                                    <div class="searchBox">
+                                        <form style="
+    display: flex;
+    width: 100%;
+    align-items: center;
+" method="post" action="#" class="search search-off-popular">
+                                            <input name="search" type="text" class="search-input input-empty" placeholder="Search Here">
+                                            <button style="display:none" type="submit" class="search-button">Search</i></button>
+                                            <i class="closeBtn fa-solid fa-x"></i>
+                                        </form>
+                                    </div>
+                                </li>
+                                <div style="
+    
+    position: absolute;
+    left: 0;
+    top: 10rem;
+    z-index: 2;
+    width: 100%;
+    height: 100%;
+    display: block;
+" class="search-results">
+                                    
+                                </div>
+                       
+
+                                <script>
+                                    const searchForm = document.querySelector('.search');
+                                    const searchInput = searchForm.querySelector('.search-input');
+                                    const searchResults = document.querySelector('.search-results');
+
+                                    searchForm.addEventListener('submit', (e) => {
+                                        e.preventDefault();
+                                        const searchQuery = searchInput.value.trim();
+                                        if (searchQuery.length < 2) {
+                                            searchResults.innerHTML = '';
+                                            return;
+                                        }
+                                        fetch(`/Home/Search?search=${searchQuery}`)
+                                            .then(response => response.text())
+                                            .then(data => {
+                                                searchResults.innerHTML = data;
+                                            })
+                                            .catch(error => console.log(error));
+                                    });
+                                </script>
+
+                                <li id="res">
+                                    <svg class="searchBtn" width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M2.26256 2.26357C3.72225 0.803883 5.66298 0 7.72725 0C9.79152 0 11.7323 0.803883 13.1919 2.26357C14.6516 3.72322 15.4555 5.66395 15.4555 7.72819C15.4555 9.61548 14.7831 11.3992 13.5524 12.8068L17.8444 17.0988C18.0505 17.305 18.0505 17.6392 17.8444 17.8454C17.7413 17.9484 17.6062 18 17.4711 18C17.3361 18 17.2009 17.9485 17.0979 17.8453L12.8059 13.5534C11.3983 14.7841 9.61454 15.4564 7.72725 15.4564C5.66295 15.4564 3.72229 14.6526 2.2626 13.1929C0.802946 11.7332 -0.000936508 9.79249 -0.000936508 7.72822C-0.000936508 5.66395 0.802912 3.72322 2.26256 2.26357ZM3.00914 12.4463C5.61074 15.0479 9.84373 15.0479 12.4453 12.4463C15.0469 9.84477 15.0469 5.61171 12.4453 3.01015C11.1444 1.70923 9.43609 1.05898 7.72722 1.05898C6.01876 1.05898 4.30975 1.70954 3.00911 3.01015C0.407614 5.61168 0.407614 9.84473 3.00914 12.4463Z" fill="black"></path>
+                                    </svg>
+                                </li>
+
+                                <li>
+                                    <span onclick="toogleUser()">
+                                        <svg width="18" height="18" viewBox="0 0 28 27" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                            <path fill-rule="evenodd" clip-rule="evenodd" d="M18.5 7C18.5 10.1442 16.1587 12.5 13.5 12.5C10.8413 12.5 8.5 10.1442 8.5 7C8.5 3.85581 10.8413 1.5 13.5 1.5C16.1587 1.5 18.5 3.85581 18.5 7ZM20 7C20 10.866 17.0899 14 13.5 14C9.91015 14 7 10.866 7 7C7 3.13401 9.91015 0 13.5 0C17.0899 0 20 3.13401 20 7ZM0.954102 25.9781C0.954102 18.7512 5.58739 14.7712 14.0003 14.7712C22.4133 14.7712 27.0466 18.7516 27.0465 25.9781C27.0465 26.5425 26.5891 27 26.0247 27H1.97599C1.41156 27 0.954102 26.5425 0.954102 25.9781ZM14 16C7.12059 16 2 19.5 2.5 25.5H25.5C25.5 19 20.8794 16 14 16Z" fill="black"></path>
+                                        </svg>
+                                    </span>
+                                    <div class="sub-menu-wrap" id="subMenu">
+                                        <div class="sub-menu">
+                                            <div class="user-info">
+                                                <h6>
+                                                    @if (User.Identity.IsAuthenticated)
+                                                    {
+                                                        @User.Identity.Name
+                                                    }
+                                                    else
+                                                    {
+                                                        <span>Guest</span>
+                                                    }
+                                                </h6>
+                                            </div>
+                                            <hr>
+
+                                            @if (User.Identity.IsAuthenticated && User.IsInRole("Admin"))
+                                            {
+                                                <a style="display:inline" href="" class="sub-menu-link">
+                                                    <p style="    margin-top: 2rem;"><i class="fa-solid fa-user"></i><a style="text-decoration:none;color:black;position:relative;left:1rem" asp-controller="Account" asp-action="UserDetail">User Detail</a></p>
+                                                </a>
+                                                <a style="display:inline"  href="" class="sub-menu-link">
+                                                    <p style="    margin-top: 2rem;"><i class="fa-solid fa-clock-rotate-left"></i><a style="text-decoration:none;color:black;position:relative;left:1rem" asp-controller="OrderHistory" asp-action="Index">Order History</a></p>
+                                                </a>
+                                                <a style="display:inline" href="" class="sub-menu-link">
+                                                    <p style="    margin-top: 2rem;"><i class="fa-sharp fa-solid fa-lock"></i><a style="text-decoration:none;color:black;position:relative;left:1rem" asp-controller="Account" asp-action="Forgot">Reset Password</a></p>
+                                                </a>
+                                                <a style="display:inline" href="" class="sub-menu-link">
+                                                    <p style="    margin-top: 2rem;"><i class="fa-sharp fa-solid fa-right-from-bracket"></i><a style="text-decoration:none;color:black;position:relative;left:1rem" asp-controller="Account" asp-action="Logout">Logout</a></p>
+                                                </a>
+                                                <a style="display:inline" href="" class="sub-menu-link">
+                                                    <p style="    margin-top: 2rem;"><i class="fa-solid fa-hammer"></i><a style="text-decoration:none;color:black;position:relative;left:1rem" href="https://localhost:7042/AdminPanel/Account/login">AdminPanel</a></p>
+                                                </a>
+
+                                            }
+                                            else if (User.Identity.IsAuthenticated)
+                                            {
+                                                <a style="display:inline" href="" class="sub-menu-link">
+                                                    <p style="    margin-top: 2rem;"><i class="fa-solid fa-user"></i><a style="text-decoration:none;color:black;position:relative;left:1rem" asp-controller="Account" asp-action="UserDetail">User Detail</a></p>
+                                                </a>
+                                                <a style="display:inline" href="" class="sub-menu-link">
+                                                    <p style="    margin-top: 2rem;"><i class="fa-solid fa-clock-rotate-left"></i><a style="text-decoration:none;color:black;position:relative;left:1rem" asp-controller="OrderHistory" asp-action="Index">Order History</a></p>
+                                                </a>
+                                                <a style="display:inline" href="" class="sub-menu-link">
+                                                    <p style="    margin-top: 2rem;"><i class="fa-sharp fa-solid fa-lock"></i><a style="text-decoration:none;color:black;position:relative;left:1rem" asp-controller="Account" asp-action="Forgot">Reset Password</a></p>
+                                                </a>
+                                                <a style="display:inline" href="" class="sub-menu-link">
+                                                    <p style="    margin-top: 2rem;"><i class="fa-sharp fa-solid fa-right-from-bracket"></i><a style="text-decoration:none;color:black;position:relative;left:1rem" asp-controller="Account" asp-action="Logout">Logout</a></p>
+                                                </a>
+                                                <a style="display:inline" href="" class="sub-menu-link">
+                                                    <p style="    margin-top: 2rem;"><i class="fa-solid fa-question"></i><a style="text-decoration:none;color:black;position:relative;left:1rem" asp-controller="Faq" asp-action="Index">FAQ</a></p>
+                                                </a>
+                                            }
+                                            else
+                                            {
+                                                <a style="display:inline" href="" class="sub-menu-link">
+                                                    <p><i class="fa-sharp fa-solid fa-right-to-bracket"></i><a style="text-decoration:none;color:black;position:relative;left:1rem" asp-controller="Account" asp-action="Login">Login</a></p>
+                                                </a>
+                                                <a style="display:inline" href="" class="sub-menu-link">
+                                                    <p style="
+    margin-top: 3rem;
+"><i class="fa-solid fa-id-card"></i><a style="text-decoration:none;color:black;position:relative;left:1rem" asp-controller="Account" asp-action="Register">Register</a></p>
+                                                </a>
+                                            }
+
+                                        </div>
+                                    </div>
+
+                                </li>
+                                <li>
+                                    <svg id="whislist-icon" width="18" height="16" viewBox="0 0 18 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M16.5461 1.55674C15.6036 0.61419 14.3558 0.0990334 13.024 0.0990334C11.6922 0.0990334 10.4406 0.618006 9.49802 1.56055L9.00576 2.05281L8.50586 1.55292C7.56332 0.610374 6.30786 0.0875854 4.97608 0.0875854C3.64812 0.0875854 2.39648 0.606558 1.45775 1.54529C0.515208 2.48783 -0.00376456 3.73948 5.14128e-05 5.07125C5.14128e-05 6.40303 0.52284 7.65085 1.46539 8.5934L8.63179 15.7598C8.73101 15.859 8.86456 15.9124 8.99431 15.9124C9.12405 15.9124 9.25761 15.8628 9.35683 15.7636L16.5385 8.60866C17.481 7.66612 18 6.41447 18 5.0827C18.0038 3.75092 17.4887 2.49928 16.5461 1.55674ZM15.8135 7.87981L8.99431 14.6722L2.19042 7.86836C1.44249 7.12043 1.03037 6.12828 1.03037 5.07125C1.03037 4.01423 1.43867 3.02207 2.18661 2.27796C2.93072 1.53384 3.92288 1.12172 4.97608 1.12172C6.03311 1.12172 7.02908 1.53384 7.77701 2.28177L8.63942 3.14418C8.84167 3.34643 9.16603 3.34643 9.36827 3.14418L10.2231 2.2894C10.971 1.54147 11.967 1.12935 13.0202 1.12935C14.0734 1.12935 15.0655 1.54147 15.8135 2.28559C16.5614 3.03352 16.9697 4.02567 16.9697 5.0827C16.9735 6.13972 16.5614 7.13188 15.8135 7.87981Z" fill="black"></path>
+                                    </svg>
+                                    <div class="whislist">
+                                        <h2 class="cart-title">Whislist</h2>
+                                        <div id="listContainer" class="cart-content">
+                                            @foreach (var item in layoutService.ShowList().WhislistItemVMs)
+                                            {
+                                                <div class="cart-box">
+                                                    <a asp-controller="Product" asp-action="Detail" asp-route-id="@item.Product.Id">
+                                                        <img style="margin-left: 0;margin-top:0;" src="~/images/products/@item.Product.ProductImages.FirstOrDefault(p=>p.IsMain==true)?.Path" alt="" class="cart-img">
+                                                    </a>
+                                                    <div class="detail-box">
+                                                        <div class="cart-product-title">@item.Product.Name</div>
+                                                        <div class="sizecolor">
+                                                           
+                                                         
+                                                            
+                                                          
+                                                            <div class="color" style="font-size: 12px;">Color: Green</div>
+                                                        </div>
+                                                        <div class="dflex" style="display: flex;justify-content: space-between;align-items: center;padding-bottom: -10rem;position: relative;bottom: 8px;/* top: -6px; */">
+                                                            <div style="width: auto;" class="cart-price">₼@item.Product.Price</div>
+                                                            
+                                                        </div>
+                                                    </div>
+                                                    <a asp-controller="Product" asp-action="RemoveWhisList" asp-route-id="@item.Product.Id">
+                                                        <svg width="13" height="15" viewBox="0 0 13 15" fill="none" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" clip-rule="evenodd" d="M4.51923 1.23798C4.6716 1.0856 4.87826 1 5.09375 1H7.71875C7.93424 1 8.1409 1.0856 8.29327 1.23798C8.44565 1.39035 8.53125 1.59701 8.53125 1.8125V2.625H4.28125V1.8125C4.28125 1.59701 4.36685 1.39035 4.51923 1.23798ZM3.28125 2.625V1.8125C3.28125 1.33179 3.47221 0.870778 3.81212 0.530869C4.15203 0.190959 4.61304 0 5.09375 0H7.71875C8.19946 0 8.66047 0.190959 9.00038 0.530869C9.34029 0.870778 9.53125 1.33179 9.53125 1.8125V2.625H11H12.3125C12.5886 2.625 12.8125 2.84886 12.8125 3.125C12.8125 3.40114 12.5886 3.625 12.3125 3.625H11.5V12.3125C11.5 12.7932 11.309 13.2542 10.9691 13.5941C10.6292 13.934 10.1682 14.125 9.6875 14.125H3.125C2.64429 14.125 2.18328 13.934 1.84337 13.5941C1.50346 13.2542 1.3125 12.7932 1.3125 12.3125V3.625H0.5C0.223858 3.625 0 3.40114 0 3.125C0 2.84886 0.223858 2.625 0.5 2.625H1.8125H3.28125ZM2.3125 3.625V12.3125C2.3125 12.528 2.3981 12.7347 2.55048 12.887C2.70285 13.0394 2.90951 13.125 3.125 13.125H9.6875C9.90299 13.125 10.1097 13.0394 10.262 12.887C10.4144 12.7347 10.5 12.528 10.5 12.3125V3.625H9.03125H3.78125H2.3125ZM5.09375 5.90625C5.36989 5.90625 5.59375 6.13011 5.59375 6.40625V10.3438C5.59375 10.6199 5.36989 10.8438 5.09375 10.8438C4.81761 10.8438 4.59375 10.6199 4.59375 10.3438V6.40625C4.59375 6.13011 4.81761 5.90625 5.09375 5.90625ZM8.21875 6.40625C8.21875 6.13011 7.99489 5.90625 7.71875 5.90625C7.44261 5.90625 7.21875 6.13011 7.21875 6.40625V10.3438C7.21875 10.6199 7.44261 10.8438 7.71875 10.8438C7.99489 10.8438 8.21875 10.6199 8.21875 10.3438V6.40625Z" fill="gray"></path></svg>
+                                                    </a>
+                                                </div>
+                                            }
+
+                                        </div>
+
+
+                                        <i class="fa-solid fa-xmark" id="close-whislist"></i>
+                                    </div>
+                                </li>
+
+
+
+
+
+                                <li>
+                                    <svg id="cart-icon" width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M17.8841 6.16824C17.7961 6.08181 17.6732 6.04083 17.5509 6.0572H12.7758V3.94723C12.7758 1.86196 11.0854 0.171539 9.0001 0.171539C6.91483 0.171539 5.2244 1.86196 5.2244 3.94723V6.0572H0.449177C0.315904 6.0572 0.182673 6.0572 0.116015 6.16824C0.026486 6.25428 -0.0150477 6.37884 0.00497521 6.5014L1.67074 15.6075C1.90345 16.8778 3.00029 17.8073 4.29153 17.8285H13.7086C15.0035 17.7967 16.0981 16.8598 16.3294 15.5853L17.9951 6.5014C18.0152 6.37884 17.9736 6.25428 17.8841 6.16824ZM6.11277 3.94723C6.11277 2.35263 7.40545 1.05994 9.00006 1.05994C10.5947 1.05994 11.8874 2.35263 11.8874 3.94723V6.0572H6.11277V3.94723ZM15.441 15.4742C15.2914 16.316 14.5635 16.9319 13.7086 16.9401H4.29153C3.43663 16.9319 2.70875 16.316 2.55915 15.4742L0.982229 6.9456H17.0179L15.441 15.4742Z" fill="black"></path>
+
+                                    </svg>
+                                    <div class="cart">
+                                        <h2 class="cart-title">Shopping Cart</h2>
+                                        <div id="basketContainer" class="cart-content">
+                                            @foreach (var item in layoutService.ShowBasket().BasketItems)
+                                            {
+                                                <div class="cart-box">
+                                                    <img style="margin-left: 0;margin-top:0;" src="~/images/products/@item.Product.ProductImages.FirstOrDefault(p=>p.IsMain==true)?.Path" alt="" class="cart-img">
+                                                    <div class="detail-box">
+                                                        <div class="cart-product-title">@item.Product.Name</div>
+                                                        <div class="sizecolor">
+                                                            <div class="size" style="font-size: 12px;">Size:
+                                                                
+                                                                @foreach (var items in sizecolor)
+                                                                {
+                                                                    
+                                                                    var productSizeColors = items.ProductSizeColors.Where(psc => psc.ProductId == item.Product.Id );
+                                                                    foreach (var itemsr in productSizeColors)
+                                                                    {
+                                                                        @itemsr.Size.Name
+                                                                        ;
+                                                                    }
+                                                                }
+                                                            </div>
+                                                            <div class="color" style="font-size: 12px;">Color:
+                                                                @foreach (var items in sizecolor)
+                                                                {
+
+                                                                    var productSizeColors = items.ProductSizeColors.Where(psc => psc.ProductId == item.Product.Id);
+                                                                    foreach (var itemsr in productSizeColors)
+                                                                    {
+                                                                        @itemsr.Color.Name;
+                                                                    }
+                                                                }
+                                                            </div>
+                                                        </div>
+                                                        <div class="dflex" style="display: flex;justify-content: space-between;align-items: center;">
+                                                            <div style="width: auto;" class="cart-price">₼@item.Product.Price</div>
+                                                            <input style="width: 40%;" class="form-control" type="number" value="@item.Count" min="0">
+                                                        </div>
+                                                    </div>
+                                                    <a asp-controller="Product" asp-action="RemoveBasketItem" asp-route-id="@item.Product.Id">
+                                                        <svg style="
+    position: relative;
+    right: 15px;
+" stop-color="" width="13" height="15" viewBox="0 0 13 15" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                            <path fill-rule="evenodd" clip-rule="evenodd" d="M4.51923 1.23798C4.6716 1.0856 4.87826 1 5.09375 1H7.71875C7.93424 1 8.1409 1.0856 8.29327 1.23798C8.44565 1.39035 8.53125 1.59701 8.53125 1.8125V2.625H4.28125V1.8125C4.28125 1.59701 4.36685 1.39035 4.51923 1.23798ZM3.28125 2.625V1.8125C3.28125 1.33179 3.47221 0.870778 3.81212 0.530869C4.15203 0.190959 4.61304 0 5.09375 0H7.71875C8.19946 0 8.66047 0.190959 9.00038 0.530869C9.34029 0.870778 9.53125 1.33179 9.53125 1.8125V2.625H11H12.3125C12.5886 2.625 12.8125 2.84886 12.8125 3.125C12.8125 3.40114 12.5886 3.625 12.3125 3.625H11.5V12.3125C11.5 12.7932 11.309 13.2542 10.9691 13.5941C10.6292 13.934 10.1682 14.125 9.6875 14.125H3.125C2.64429 14.125 2.18328 13.934 1.84337 13.5941C1.50346 13.2542 1.3125 12.7932 1.3125 12.3125V3.625H0.5C0.223858 3.625 0 3.40114 0 3.125C0 2.84886 0.223858 2.625 0.5 2.625H1.8125H3.28125ZM2.3125 3.625V12.3125C2.3125 12.528 2.3981 12.7347 2.55048 12.887C2.70285 13.0394 2.90951 13.125 3.125 13.125H9.6875C9.90299 13.125 10.1097 13.0394 10.262 12.887C10.4144 12.7347 10.5 12.528 10.5 12.3125V3.625H9.03125H3.78125H2.3125ZM5.09375 5.90625C5.36989 5.90625 5.59375 6.13011 5.59375 6.40625V10.3438C5.59375 10.6199 5.36989 10.8438 5.09375 10.8438C4.81761 10.8438 4.59375 10.6199 4.59375 10.3438V6.40625C4.59375 6.13011 4.81761 5.90625 5.09375 5.90625ZM8.21875 6.40625C8.21875 6.13011 7.99489 5.90625 7.71875 5.90625C7.44261 5.90625 7.21875 6.13011 7.21875 6.40625V10.3438C7.21875 10.6199 7.44261 10.8438 7.71875 10.8438C7.99489 10.8438 8.21875 10.6199 8.21875 10.3438V6.40625Z" fill="gray"></path>
+                                                        </svg>
+                                                    </a>
+
+                                                </div>
+                                            }
+
+
+
+                                        </div>
+                                        <div class="total">
+                                            
+
+                                        </div>
+                                        <div class="routing">
+
+                                            @if (User.Identity.IsAuthenticated)
+                                            {
+                                                <button type="button" class="btn btn-secondary"><a style="text-decoration:none" asp-controller="Cart" asp-action="Index">VIEW MY CART</a></button>
+                                                <button type="button" class="btn btn-primary"><a style="text-decoration:none;color:white" asp-controller="Order" asp-action="Checkout">CHECK OUT</a></button>
+                                            }
+                                            else
+                                            {
+                                                <button disabled type="button" class="btn btn-secondary"><a style="text-decoration:none" asp-controller="Cart" asp-action="Index">VIEW MY CART</a></button>
+                                                <button disabled type="button" class="btn btn-primary"><a style="text-decoration:none;color:white" asp-controller="Order" asp-action="Checkout">CHECK OUT</a></button>
+                                            }
+                                        </div>
+                                        <i class="fa-solid fa-xmark" id="close-cart"></i>
+                                    </div>
+                                </li>
+
+
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </nav>
+    </header>
+    @RenderBody()
+
+    <footer>
+        <div class="container">
+            <div class="row">
+                <div class="header">
+                    <div class="text">
+                        <h5>
+                            Do you want to be among the first to know
+                            about sale time?
+                        </h5>
+                    </div>
+                    <div class="subbutton" style="display: flex;">
+                        <form method="post" style="position:relative" asp-action="NewsLetter">
+                            <input for="email" name="email" type="text" placeholder="Enter Your Email Here">
+                            <div style="
+    position: absolute;
+    right: 10rem;
+    bottom: 3.1rem;
+" class="button">
+                                <button style="" type="submit">SUBSCRIBE</button>
+                            </div>
+                      </form>
+                    </div>
+                </div>
+                <div class="col-lg-3">
+                    <img src="~/images/header/headerlogo.svg" alt="">
+                    <div class="text">
+                        <span>Worldwide fashion store with wide collection of styles with over 100 international fashion brands.</span>
+                    </div>
+                    <div class="media">
+                        <ul style="list-style-type: none;">
+                            <li>
+                                <svg width="30" height="30" viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M29.9707 8.82008C29.9004 7.22607 29.6426 6.1302 29.2734 5.18061C28.8924 4.17264 28.3064 3.27022 27.5386 2.52002C26.7884 1.75816 25.88 1.16615 24.8837 0.79117C23.9286 0.421912 22.8385 0.16414 21.2445 0.0938599C19.6385 0.0176273 19.1287 0 15.0557 0C10.9826 0 10.4728 0.0176273 8.87281 0.0879078C7.2788 0.158188 6.18293 0.416189 5.23357 0.785218C4.22538 1.16615 3.32295 1.7522 2.57276 2.52002C1.81089 3.27022 1.21911 4.1786 0.843904 5.17489C0.474646 6.1302 0.216875 7.22012 0.146594 8.81413C0.0703617 10.4201 0.0527344 10.9299 0.0527344 15.0029C0.0527344 19.076 0.0703617 19.5858 0.140642 21.1858C0.210923 22.7798 0.468923 23.8757 0.838181 24.8253C1.21911 25.8332 1.81089 26.7356 2.57276 27.4858C3.32295 28.2477 4.23133 28.8397 5.22762 29.2147C6.18293 29.584 7.27285 29.8417 8.86709 29.912C10.4668 29.9825 10.9769 29.9999 15.0499 29.9999C19.123 29.9999 19.6328 29.9825 21.2328 29.912C22.8268 29.8417 23.9227 29.584 24.872 29.2147C26.8882 28.4352 28.4822 26.8412 29.2617 24.8253C29.6307 23.8699 29.8887 22.7798 29.959 21.1858C30.0293 19.5858 30.0469 19.076 30.0469 15.0029C30.0469 10.9299 30.041 10.4201 29.9707 8.82008ZM27.2691 21.0686C27.2046 22.5337 26.9585 23.3249 26.7533 23.8523C26.2493 25.1593 25.212 26.1965 23.905 26.7006C23.3776 26.9057 22.5807 27.1518 21.1213 27.2162C19.539 27.2867 19.0644 27.3041 15.0616 27.3041C11.0588 27.3041 10.5783 27.2867 9.0017 27.2162C7.53657 27.1518 6.7454 26.9057 6.21795 26.7006C5.56757 26.4602 4.97557 26.0793 4.49505 25.5812C3.99691 25.0947 3.61598 24.5086 3.3756 23.8583C3.17048 23.3308 2.92439 22.5337 2.86006 21.0745C2.78955 19.4922 2.77215 19.0174 2.77215 15.0146C2.77215 11.0118 2.78955 10.5313 2.86006 8.95492C2.92439 7.48979 3.17048 6.69862 3.3756 6.17117C3.61598 5.52056 3.99691 4.92879 4.501 4.44804C4.98724 3.9499 5.5733 3.56897 6.22391 3.32882C6.75135 3.1237 7.54847 2.87761 9.00765 2.81305C10.59 2.74277 11.0648 2.72514 15.0673 2.72514C19.0761 2.72514 19.5506 2.74277 21.1272 2.81305C22.5924 2.87761 23.3835 3.1237 23.911 3.32882C24.5614 3.56897 25.1534 3.9499 25.6339 4.44804C26.132 4.93451 26.513 5.52056 26.7533 6.17117C26.9585 6.69862 27.2046 7.49551 27.2691 8.95492C27.3394 10.5373 27.357 11.0118 27.357 15.0146C27.357 19.0174 27.3394 19.4862 27.2691 21.0686Z" fill="white"></path>
+                                    <path d="M15.0557 7.29639C10.8011 7.29639 7.34912 10.7481 7.34912 15.003C7.34912 19.2578 10.8011 22.7096 15.0557 22.7096C19.3105 22.7096 22.7623 19.2578 22.7623 15.003C22.7623 10.7481 19.3105 7.29639 15.0557 7.29639ZM15.0557 20.002C12.2955 20.002 10.0566 17.7634 10.0566 15.003C10.0566 12.2426 12.2955 10.0039 15.0557 10.0039C17.8161 10.0039 20.0548 12.2426 20.0548 15.003C20.0548 17.7634 17.8161 20.002 15.0557 20.002Z" fill="white"></path>
+                                    <path d="M24.8663 6.99201C24.8663 7.98555 24.0607 8.79114 23.067 8.79114C22.0734 8.79114 21.2678 7.98555 21.2678 6.99201C21.2678 5.99824 22.0734 5.19287 23.067 5.19287C24.0607 5.19287 24.8663 5.99824 24.8663 6.99201Z" fill="white"></path>
+                                </svg>
+                            </li>
+                            <li>
+                                <svg width="30" height="30" viewBox="0 0 61 61" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M41.667 10.1261H48V0.427091C44.9337 0.1384 41.8528 -0.00413056 38.77 9.10854e-05C29.6073 9.10854e-05 23.3417 5.06308 23.3417 14.3351V22.3261H13V33.184H23.3417V61H35.7382V33.184H46.0462L47.5958 22.3261H35.7382V15.4026C35.7382 12.2001 36.6814 10.1261 41.667 10.1261Z" fill="white"></path>
+                                </svg>
+                            </li>
+                            <li>
+                                <svg width="30" height="30" viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M27.2305 6.58974C24.0816 6.58974 21.5197 4.02786 21.5197 0.878906C21.5197 0.393448 21.1263 0 20.6408 0H15.9336C15.4484 0 15.0547 0.393448 15.0547 0.878906V20.1778C15.0547 22.029 13.5484 23.535 11.6972 23.535C9.84604 23.535 8.34 22.029 8.34 20.1778C8.34 18.3263 9.84604 16.8203 11.6972 16.8203C12.1827 16.8203 12.5761 16.4268 12.5761 15.9414V11.2342C12.5761 10.749 12.1827 10.3553 11.6972 10.3553C6.2812 10.3553 1.875 14.7617 1.875 20.1778C1.875 25.5938 6.2812 30 11.6972 30C17.1133 30 21.5197 25.5938 21.5197 20.1778V11.6352C23.2688 12.5679 25.2155 13.0547 27.2305 13.0547C27.716 13.0547 28.1094 12.6613 28.1094 12.1758V7.46864C28.1094 6.98341 27.716 6.58974 27.2305 6.58974Z" fill="white"></path>
+                                </svg>
+                            </li>
+                            <li>
+                                <svg width="30" height="30" viewBox="0 0 61 61" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M61 11.8274C58.7054 12.8214 56.2786 13.4821 53.7944 13.7889C56.4123 12.2463 58.3697 9.80358 59.2958 6.92348C56.8444 8.36752 54.1624 9.38443 51.3658 9.9302C49.6511 8.1117 47.4254 6.84743 44.9779 6.30166C42.5304 5.75589 39.9742 5.95384 37.6415 6.8698C35.3087 7.78575 33.3072 9.37736 31.897 11.4379C30.4868 13.4983 29.733 15.9325 29.7337 18.424C29.7337 19.4086 29.8176 20.3553 30.0234 21.2565C25.0484 21.0142 20.1809 19.7317 15.7391 17.4929C11.2974 15.254 7.38136 12.1092 4.24712 8.264C2.64137 10.9975 2.14495 14.2362 2.85893 17.3205C3.57291 20.4049 5.44362 23.1029 8.09012 24.8653C6.11051 24.8126 4.17268 24.2879 2.44 23.3355V23.4718C2.44332 26.34 3.44141 29.1196 5.26627 31.3425C7.09113 33.5654 9.63132 35.096 12.4592 35.6766C11.3894 35.9567 10.2868 36.0942 9.1805 36.0856C8.38593 36.0996 7.59216 36.0286 6.81294 35.8736C7.62096 38.3389 9.17856 40.4947 11.2713 42.0444C13.3639 43.594 15.8888 44.4611 18.4983 44.5264C14.0717 47.965 8.61234 49.8303 2.99281 49.8241C1.96725 49.8241 0.983625 49.7787 0 49.6537C5.7183 53.3138 12.3818 55.2499 19.1845 55.2279C42.1967 55.2279 54.778 36.2939 54.778 19.8819C54.778 19.3328 54.7589 18.8027 54.7322 18.2763C57.1988 16.523 59.3228 14.3376 61 11.8274V11.8274Z" fill="white"></path>
+                                </svg>
+                            </li>
+                            <li>
+                                <svg width="30" height="30" viewBox="0 0 61 61" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M48.9975 44.6195H45.65L45.6656 42.6749C45.6676 42.258 45.8344 41.8588 46.1296 41.5645C46.4248 41.2701 46.8245 41.1045 47.2414 41.1038H47.4556C47.8732 41.1038 48.2738 41.269 48.5699 41.5634C48.866 41.8578 49.0337 42.2574 49.0362 42.6749L48.9975 44.6195ZM36.441 40.4525C35.5918 40.4525 34.8971 41.0239 34.8971 41.722V51.179C34.8971 51.8764 35.5918 52.4458 36.441 52.4458C37.2937 52.4458 37.9891 51.8764 37.9891 51.179V41.722C37.9891 41.0232 37.2937 40.4525 36.441 40.4525ZM56.8333 35.1624V53.1534C56.8333 57.4688 53.0913 61 48.517 61H14.317C9.74133 61 6 57.4688 6 53.1534V35.1624C6 30.847 9.74133 27.3151 14.317 27.3151H48.517C53.0913 27.3151 56.8333 30.847 56.8333 35.1624M16.5984 55.1067L16.5957 36.1554L20.8352 36.1567V33.3487L9.53393 33.3318V36.0923L13.0618 36.1025V55.1067H16.5984V55.1067ZM29.3067 38.9783H25.7721V49.0982C25.7721 50.5622 25.8609 51.2942 25.7667 51.5525C25.4793 52.3373 24.1875 53.171 23.6839 51.6372C23.5985 51.3688 23.6737 50.5595 23.6724 49.168L23.6581 38.9783H20.1432L20.154 49.0081C20.1567 50.5453 20.1195 51.6914 20.1662 52.2133C20.2523 53.133 20.2218 54.2053 21.0751 54.818C22.6652 55.9634 25.7132 54.6472 26.4757 53.0097L26.4689 55.0993L29.3074 55.1027L29.3067 38.9783V38.9783ZM40.6141 50.567L40.606 42.1442C40.6039 38.9343 38.2026 37.0121 34.9431 39.6093L34.9574 33.3473L31.4262 33.3528L31.4099 54.9671L34.3128 54.9251L34.5771 53.579C38.2873 56.9821 40.6195 54.6499 40.6141 50.567M51.6754 49.4507L49.0253 49.4642C49.024 49.5693 49.0199 49.6906 49.0186 49.8228V51.3024C49.0186 52.094 48.3645 52.7379 47.5701 52.7379H47.051C46.2553 52.7379 45.6012 52.094 45.6012 51.3024V47.4126H51.67V45.1285C51.67 43.4591 51.6273 41.7904 51.4891 40.8361C51.0546 37.8173 46.8165 37.3381 44.6767 38.8834C43.9824 39.3738 43.4628 40.0732 43.1937 40.8795C42.8921 41.7477 42.743 42.9338 42.743 44.4405V49.4629C42.745 57.8117 52.886 56.6317 51.6754 49.4507M38.0813 22.185C38.2546 22.6177 38.5499 22.9906 38.9312 23.2586C39.3107 23.5257 39.796 23.6599 40.3776 23.6599C40.8873 23.6599 41.3387 23.5223 41.7318 23.2383C42.1235 22.9557 42.4536 22.5334 42.7234 21.9702L42.6563 23.3569H46.5962V6.60156H43.4947V19.642C43.4814 19.9757 43.3396 20.2913 43.0988 20.5226C42.8581 20.754 42.5371 20.8833 42.2032 20.8833C41.8692 20.8833 41.5483 20.754 41.3075 20.5226C41.0668 20.2913 40.9249 19.9757 40.9117 19.642V6.60156H37.6746V17.9028C37.6746 19.3424 37.701 20.3022 37.7437 20.7888C37.7878 21.2721 37.8989 21.7357 38.0813 22.185M26.1415 12.7219C26.1415 11.1135 26.2757 9.8576 26.5421 8.95209C26.8105 8.04997 27.2924 7.32474 27.9905 6.77778C28.6866 6.2281 29.5779 5.95292 30.6616 5.95292C31.5732 5.95292 32.354 6.13186 33.0061 6.48227C33.6615 6.83471 34.1664 7.29221 34.5175 7.8568C34.8609 8.39113 35.1078 8.98164 35.2468 9.6014C35.379 10.2053 35.444 11.1162 35.444 12.345V16.5825C35.444 18.1367 35.3817 19.2801 35.2603 20.006C35.1418 20.7302 34.8775 21.4228 34.4836 22.042C34.0905 22.6683 33.5828 23.1366 32.9674 23.4355C32.3452 23.7371 31.6336 23.8849 30.8297 23.8849C29.9317 23.8849 29.1753 23.7609 28.5517 23.5019C27.9261 23.2444 27.4429 22.856 27.0985 22.3402C26.7508 21.8238 26.5062 21.1948 26.3584 20.4614C26.21 19.7288 26.1395 18.6267 26.1395 17.1579L26.1415 12.7219V12.7219ZM29.2274 19.3777C29.2274 20.3266 29.9337 21.1013 30.7938 21.1013C31.6552 21.1013 32.3581 20.3266 32.3581 19.3777V10.4581C32.3581 9.51058 31.6552 8.73588 30.7938 8.73588C29.9337 8.73588 29.2274 9.51058 29.2274 10.4581V19.3777ZM18.3234 23.8815H22.0403L22.0444 11.0308L26.4364 0.0223667H22.371L20.0361 8.19908L17.6679 0H13.6447L18.3173 11.0369L18.3234 23.8815V23.8815Z" fill="white"></path>
+                                </svg>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-lg-3">
+                    <div class="header"><span>INFORMATION</span></div>
+                    <ul style="list-style-type: none;">
+                        <a href="">
+                        <li>About us</li></a>
+                        <a href="">
+                        <li>Search</li></a>
+                        <a href="">
+                        <li>Contacts</li></a>
+                        <a href="">
+                        <li>Our News</li></a>
+                    </ul>
+                </div>
+                <div class="col-lg-3">
+                    <div class="header"><span>GET SHOPPING</span></div>
+                    <ul style="list-style-type: none;">
+                        <a href="">
+                        <li>Women</li></a>
+                        <a href="">
+                        <li>Men</li></a>
+                        <a href="">
+                        <li>Teenagers</li></a>
+                        <a href="">
+                        <li>Accesssories</li></a>
+                    </ul>
+                </div>
+                <div class="col-lg-3">
+                    <div class="header"><span>CONTACTS</span></div>
+                    <span>Phone:	+994555334343</span>
+                    <span>Email:eminra@code.edu.az </span><br>
+                    <span>Adress:Code Academy</span>
+                </div>
+                <div class="copyright">
+                    <span style="color: white; font-size: 14px;">© 2023, Lumia Theme Powered by Bigsteps</span>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+
+
+    <progress max="100" value="0">
+
+    </progress>
+
+    <div id="backToTop">
+        <i class="fas fa-chevron-up"></i>
+    </div>
+    <script>
+        function getTotalPrice() {
+            fetch('/Product/GetTotalPrice', {
+                method: 'GET',
+                credentials: 'same-origin'
+            })
+                .then(response => response.text())
+                .then(totalPrice => {
+                    console.log('Total Price:', totalPrice);
+                })
+                .catch(error => {
+                    console.error(error);
+                });
+        }
+
+
+
+
+       
+
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.5/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.9.1/ScrollTrigger.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.3/jquery.min.js" integrity="sha512-STof4xm1wgkfm7heWqFJVn58Hm3EtS31XFaagaa8VMReCXAkQnJZ+jEy8PCC/iT18dFy95WcExNHFTqLyp72eQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="~/js/owl.carousel.min.js"></script>
+    <script src="~/js/index.js"></script>
+</body>
+</html>

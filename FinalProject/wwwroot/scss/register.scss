@@ -1,0 +1,72 @@
+@media screen and (max-width: 992px){
+    main{
+        .container{
+            .row{
+                flex-wrap: nowrap;
+                width: 53%;
+                .left{
+                  .image{
+                    img{
+                        width: 300px !important;
+                    }
+                  }
+                }
+                .right{
+                    .input{
+                        margin-top: 1rem;
+                        margin-left: 6.5rem;
+                    }
+                }
+            }
+        }
+    }
+    footer{
+        margin-top: 3rem;
+    }
+}
+@media screen and (max-width: 399px){
+    main{
+        .container{
+            .row{
+                flex-wrap: nowrap;
+                width: 53%;
+                .left{
+                  .image{
+                    img{
+                        width: 180px !important;
+                    }
+                  }
+                }
+                .right{
+                    span{
+                        margin-left: 0rem !important;
+                    }
+                    .input{
+                        form{
+                            input{
+                                width: 100%;
+                            }
+                            .btn-primary{
+                                width: 100% !important;
+                            }
+                        }
+                    }
+                    .head{
+                        h6{
+                            font-size: 15px;
+                        }
+                        span{
+                            font-size: 10px;
+                        }
+                        margin-left: 0rem;
+                        text-align: inherit !important;
+                    }
+                    .input{
+                        margin-top: 1rem;
+                        margin-left: 0rem;
+                    }
+                }
+            }
+        }
+    }
+}

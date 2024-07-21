@@ -1,0 +1,697 @@
+﻿@using FinalProject.Entities;
+@model List<Product>
+@{
+    List<Product> products = ViewBag.NewArrival;
+    string filter = ViewBag.filters;
+}
+    <head>
+        <link rel="stylesheet" href="~/css/shop.css">
+    </head>
+    <style>
+
+    main #productsfilter .container .row .filters ul .filter .cart-content .vendor .headeraccor {
+        cursor: pointer;
+    }
+
+        main #productsfilter .container .row .filters ul .filter .cart-content .vendor .headeraccor span {
+            font-size: 12px;
+            letter-spacing: 0.1em;
+            font-size: 16px;
+        }
+
+    main #productsfilter .container .row .filters ul .filter .cart-content .vendor .bodyaccor {
+        display: none;
+    }
+
+        main #productsfilter .container .row .filters ul .filter .cart-content .vendor .bodyaccor.active {
+            display: block;
+        }
+
+    main #productsfilter .container .row .filters ul .filter .cart-content .vendor .accordion-list .headeraccor {
+        border-bottom: 1px solid rgba(128, 128, 128, 0.518);
+    }
+
+    main #productsfilter .container .row .filters ul .filter .cart-content .vendor .accordion-list .headeraccor span {
+            font-weight: bold;
+        }
+
+        main #productsfilter .container .row .filters ul .filter .cart-content .vendor .accordion-list .headeraccor i {
+            float: right;
+        }
+
+    main #productsfilter .container .row .filters ul .filter .cart-content .vendor ul {
+        height: 30vh;
+        flex-direction: column;
+        overflow-y: scroll;
+    }
+
+        main #productsfilter .container .row .filters ul .filter .cart-content .vendor ul li {
+            padding-bottom: 1rem;
+        }
+
+    main #productsfilter .container .row .filters ul .filter .cart-content .vendor .styled-checkbox {
+        display: inline-flex;
+        gap: 8px;
+    }
+
+        main #productsfilter .container .row .filters ul .filter .cart-content .vendor .styled-checkbox span {
+            cursor: pointer;
+        }
+
+        main #productsfilter .container .row .filters ul .filter .cart-content .vendor .styled-checkbox input {
+            visibility: hidden;
+            position: absolute;
+        }
+
+        main #productsfilter .container .row .filters ul .filter .cart-content .vendor .styled-checkbox .el {
+            width: 32px;
+            height: 32px;
+            border: solid 1px grey;
+            border-radius: 3px;
+        }
+
+            main #productsfilter .container .row .filters ul .filter .cart-content .vendor .styled-checkbox .el svg {
+                transition: 0.3s ease;
+            }
+
+        main #productsfilter .container .row .filters ul .filter .cart-content .vendor .styled-checkbox input:not(:checked) ~ .el svg {
+            opacity: 0;
+        }
+
+        main #productsfilter .container .row .filters ul .filter .cart-content .vendor .styled-checkbox.style-cyan svg {
+            fill: #11EFFF;
+        }
+
+        main #productsfilter .container .row .filters ul .filter .cart-content .vendor .styled-checkbox.style-cyan input:checked ~ .el {
+            background-color: rgba(17, 239, 255, 0.1098039216);
+            border-color: #11EFFF;
+        }
+
+        main #productsfilter .container .row .filters ul .filter .cart-content .vendor .styled-checkbox.style-cyan:hover .el {
+            border-color: #11EFFF;
+        }
+
+        main #productsfilter .container .row .filters ul .filter .cart-content .vendor .styled-checkbox.style-gray svg {
+            fill: #e3e3e3;
+        }
+
+        main #productsfilter .container .row .filters ul .filter .cart-content .vendor .styled-checkbox.style-gray input:checked ~ .el {
+            background-color: rgb(255, 255, 255);
+            border-color: #e3e3e3;
+        }
+
+        main #productsfilter .container .row .filters ul .filter .cart-content .vendor .styled-checkbox.style-gray:hover .el {
+            border-color: #e3e3e3;
+        }
+
+        main #productsfilter .container .row .filters ul .filter .cart-content .vendor .styled-checkbox.style-red svg {
+            fill: rgb(209, 58, 41);
+        }
+
+    main #productsfilter .container .row .filters ul .filter .cart-content .vendor .styled-checkbox.style-red input:checked ~ .el {
+            background-color: rgba(209, 58, 41, 0.05);
+            border-color: rgb(209, 58, 41);
+        }
+
+        main #productsfilter .container .row .filters ul .filter .cart-content .vendor .styled-checkbox.style-red:hover .el {
+            border-color: rgb(209, 58, 41);
+        }
+
+        main #productsfilter .container .row .filters ul .filter .cart-content .vendor .styled-checkbox.style-purple svg {
+            fill: rgb(169, 3, 252);
+        }
+
+        main #productsfilter .container .row .filters ul .filter .cart-content .vendor .styled-checkbox.style-purple input:checked ~ .el {
+            background-color: rgba(169, 3, 252, 0.05);
+            border-color: rgb(169, 3, 252);
+        }
+
+        main #productsfilter .container .row .filters ul .filter .cart-content .vendor .styled-checkbox.style-purple:hover .el {
+            border-color: rgb(169, 3, 252);
+        }
+
+        main #productsfilter .container .row .filters ul .filter .cart-content .vendor .styled-checkbox.style-orange svg {
+            fill: rgb(252, 152, 3);
+        }
+
+        main #productsfilter .container .row .filters ul .filter .cart-content .vendor .styled-checkbox.style-orange input:checked ~ .el {
+            background-color: rgba(252, 152, 3, 0.05);
+            border-color: rgb(252, 152, 3);
+        }
+
+        main #productsfilter .container .row .filters ul .filter .cart-content .vendor .styled-checkbox.style-orange:hover .el {
+            border-color: rgb(252, 152, 3);
+        }
+
+        main #productsfilter .container .row .filters ul .filter .cart-content .vendor .styled-checkbox.style-blue svg {
+            fill: rgb(66, 69, 255);
+        }
+
+        main #productsfilter .container .row .filters ul .filter .cart-content .vendor .styled-checkbox.style-blue input:checked ~ .el {
+            background-color: rgba(66, 69, 255, 0.05);
+            border-color: rgb(66, 69, 255);
+        }
+
+        main #productsfilter .container .row .filters ul .filter .cart-content .vendor .styled-checkbox.style-blue:hover .el {
+            border-color: rgb(66, 69, 255);
+        }
+
+    main #productsfilter .container .row .filters ul .filter .cart-content .vendor .styled-checkbox.style-green svg {
+            fill: rgb(23, 230, 40);
+        }
+
+        main #productsfilter .container .row .filters ul .filter .cart-content .vendor .styled-checkbox.style-green input:checked ~ .el {
+            background-color: rgba(23, 230, 40, 0.05);
+            border-color: rgb(23, 230, 40);
+        }
+
+        main #productsfilter .container .row .filters ul .filter .cart-content .vendor .styled-checkbox.style-green:hover .el {
+            border-color: rgb(23, 230, 40);
+        }
+
+        main #productsfilter .container .row .filters ul .filter .cart-content .vendor .styled-checkbox.style-yellow svg {
+            fill: rgb(255, 238, 0);
+        }
+
+        main #productsfilter .container .row .filters ul .filter .cart-content .vendor .styled-checkbox.style-yellow input:checked ~ .el {
+            background-color: rgba(255, 238, 0, 0.05);
+            border-color: rgb(255, 238, 0);
+        }
+
+        main #productsfilter .container .row .filters ul .filter .cart-content .vendor .styled-checkbox.style-yellow:hover .el {
+            border-color: rgb(255, 238, 0);
+        }
+
+        main #productsfilter .container .row .filters ul .filter .cart-content .vendor .styled-checkbox.style-gold svg {
+            fill: rgb(255, 200, 0);
+        }
+
+        main #productsfilter .container .row .filters ul .filter .cart-content .vendor .styled-checkbox.style-gold input:checked ~ .el {
+            background-color: rgba(255, 200, 0, 0.05);
+            border-color: rgb(255, 200, 0);
+        }
+
+        main #productsfilter .container .row .filters ul .filter .cart-content .vendor .styled-checkbox.style-gold:hover .el {
+            border-color: rgb(255, 200, 0);
+        }
+
+        main #productsfilter .container .row .filters ul .filter .cart-content .vendor .styled-checkbox.style-pink svg {
+            fill: rgb(255, 102, 161);
+        }
+
+        main #productsfilter .container .row .filters ul .filter .cart-content .vendor .styled-checkbox.style-pink input:checked ~ .el {
+            background-color: rgba(255, 102, 161, 0.05);
+            border-color: rgb(255, 102, 161);
+        }
+
+        main #productsfilter .container .row .filters ul .filter .cart-content .vendor .styled-checkbox.style-pink:hover .el {
+            border-color: rgb(255, 102, 161);
+        }
+
+        main #productsfilter .container .row .filters ul .filter .cart-content .vendor .styled-checkbox.translate input:not(:checked) ~ .el svg {
+            transform: translateX(20px);
+        }
+
+        main #productsfilter .container .row .filters ul .filter .cart-content .vendor .styled-checkbox.scale input:not(:checked) ~ .el svg {
+            transform: scale(3);
+        }
+
+        main #productsfilter .container .row .filters ul .filter .cart-content .vendor .styled-checkbox.rotate input:not(:checked) ~ .el svg {
+            transform: rotate(360deg);
+        }
+
+        main #productsfilter .container .row .filters ul .filter .cart-content .vendor .styled-checkbox.translate.scale input:not(:checked) ~ .el svg {
+            transform: translateX(20px) scale(3);
+        }
+
+    main #productsfilter .container .row .filters ul .filter .cart-content .vendor button {
+        border-radius: 6px;
+        padding: 9px;
+        cursor: pointer;
+    }
+
+        main #productsfilter .container .row .filters ul .filter .cart-content .vendor button.uncheck {
+            border: solid 1px rgb(209, 58, 41);
+            background-color: rgba(209, 58, 41, 0.04);
+            color: rgb(209, 58, 41);
+        }
+
+            main #productsfilter .container .row .filters ul .filter .cart-content .vendor button.uncheck:hover {
+                background-color: rgba(209, 58, 41, 0.1);
+            }
+
+        main #productsfilter .container .row .filters ul .filter .cart-content .vendor button.check {
+            border: solid 1px #11EFFF;
+            color: #11EFFF;
+            background-color: rgba(17, 239, 255, 0.1098039216);
+            margin-right: 10px;
+        }
+
+            main #productsfilter .container .row .filters ul .filter .cart-content .vendor button.check:hover {
+                background-color: rgba(17, 239, 255, 0.1764705882);
+            }
+
+    main #productsfilter .container .row .filters ul .filter .cart-content .vendor .checkboxesType_container {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 20px 120px;
+    }
+
+        main #productsfilter .container .row .filters ul .filter .cart-content .vendor .checkboxesType_container > div {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            gap: 12px;
+        }
+</style>
+    <main>
+        <div id="loading">
+            <div class="custom-loader"></div>
+        </div>
+        <div class="text">
+            <div class="container">
+                <span>
+                    The latest Men fashion collections for Spring/Summer and Fall/Winter are now available to bought! Our online store presents a wide selection of fashionable apparel specifically designed to make you look your best.  We have put together the most stylish and trendy looks for you so that you can keep up with the latest fashion trends. This fashion collection will have you looking your best in no time! Don't miss the chance to get your hands on the latest fashion clothes for Men!
+                </span>
+                <hr>
+            </div>
+        </div>
+        <section id="productsfilter">
+            <div class="container">
+                <div class="row">
+                    <div class="filters">
+                        <ul style="list-style-type: none;padding-left: 16px">
+                            <li>
+                                <svg id="filter-icon" width="20" height="18" viewBox="0 0 20 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M19 1H1L8.2 9.40889V15.2222L11.8 17V9.40889L19 1Z" class="path--nofill" stroke="black" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"></path>
+                                </svg>
+                                <div class="filter">
+                                    <h2 class="cart-title">Filter by</h2>
+                                    <div class="cart-content">
+                                        <div class="container">
+                                            <div class="col">
+                                                <div class="row">
+                                                    @*<div id="range" class="d-flex">
+                                                        <div class="wrapper">
+
+                                                            <div class="price-input">
+                                                                <div class="field">
+                                                                    <span>From, $</span>
+                                                                    <input type="number" class="input-min" value="0">
+                                                                </div>
+                                                                <div class="separator">-</div>
+                                                                <div class="field">
+                                                                    <span>To, $</span>
+                                                                    <input type="number" class="input-max" value="200">
+                                                                </div>
+                                                            </div>
+                                                            <div class="slider">
+                                                                <div class="progress"></div>
+                                                            </div>
+                                                            <div class="range-input">
+                                                                <input type="range" class="range-min" min="0" max="200" value="0" step="5">
+                                                                <input type="range" class="range-max" min="0" max="200" value="200" step="5">
+                                                            </div>
+                                                        </div>
+
+
+
+                                                    </div>*@
+                                                <form id="filterForm">
+                                                    <div class="color">
+                                                        <div class="headeraccor active p-3">
+                                                            <i style="  float: right !important;" class="fa-solid fa-chevron-up"></i>
+                                                            <span>Color</span>
+                                                            <hr>
+                                                        </div>
+                                                        <div class="bodyaccor active">
+                                                            <ul style="list-style-type: none; padding-left:0;justify-content:normal;height: max-content;">
+                                                                @{
+                                                                    var uniqueColors = new List<string>();
+                                                                }
+
+                                                                @foreach (var item in products)
+                                                                {
+                                                                    @foreach (var items in item.ProductSizeColors)
+                                                                    {
+
+                                                                        if (!uniqueColors.Contains(items.Color.Name))
+                                                                        {
+                                                                            uniqueColors.Add(items.Color.Name);
+
+                                                                            <li>
+                                                                                <label class="styled-checkbox translate style-@items.Color.Name.ToLower()">
+                                                                                    <input type="checkbox" name="colorIds" value="@items.Color.Id" />
+                                                                                    <span class="el">
+                                                                                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M11.602 13.7599L13.014 15.1719L21.4795 6.7063L22.8938 8.12051L13.014 18.0003L6.65 11.6363L8.06421 10.2221L10.189 12.3469L11.6025 13.7594L11.602 13.7599ZM11.6037 10.9322L16.5563 5.97949L17.9666 7.38977L13.014 12.3424L11.6037 10.9322ZM8.77698 16.5873L7.36396 18.0003L1 11.6363L2.41421 10.2221L3.82723 11.6352L3.82604 11.6363L8.77698 16.5873Z"></path></svg>
+                                                                                    </span>
+                                                                                    <span>@items.Color.Name</span>
+                                                                                </label>
+                                                                            </li>
+                                                                        }
+                                                                    }
+                                                                }
+
+
+                                                            </ul>
+                                                        </div>
+                                                    </div>
+                                                    <div class="size">
+                                                        <div class="headeraccor active p-3">
+                                                            <i style="  float: right !important;" class="fa-solid fa-chevron-up"></i>
+                                                            <span>Size</span>
+                                                            <hr>
+                                                        </div>
+                                                        <div class="bodyaccor active">
+                                                            <ul style="list-style-type: none;padding-left: 0;justify-content:normal;height: max-content;">
+                                                                @{
+                                                                    var uniqueSizes = new List<string>();
+                                                                }
+
+                                                                @foreach (var item in products)
+                                                                {
+                                                                    @foreach (var items in item.ProductSizeColors)
+                                                                    {
+                                                                        if (!uniqueSizes.Contains(items.Size.Name))
+                                                                        {
+                                                                            uniqueSizes.Add(items.Size.Name);
+
+                                                                            <li>
+                                                                                <label class="styled-checkbox translate style-gray">
+                                                                                    <input type="checkbox" name="sizeIds" value="@items.Size.Id" />
+                                                                                    <span class="el">
+                                                                                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M11.602 13.7599L13.014 15.1719L21.4795 6.7063L22.8938 8.12051L13.014 18.0003L6.65 11.6363L8.06421 10.2221L10.189 12.3469L11.6025 13.7594L11.602 13.7599ZM11.6037 10.9322L16.5563 5.97949L17.9666 7.38977L13.014 12.3424L11.6037 10.9322ZM8.77698 16.5873L7.36396 18.0003L1 11.6363L2.41421 10.2221L3.82723 11.6352L3.82604 11.6363L8.77698 16.5873Z"></path></svg>
+                                                                                    </span>
+                                                                                    <span>@items.Size.Name</span>
+                                                                                </label>
+                                                                            </li>
+                                                                        }
+                                                                    }
+                                                                }
+
+                                                            </ul>
+                                                        </div>
+                                                    </div>
+                                                    <div class="brand">
+                                                        <div class="headeraccor active p-3">
+                                                            <i style="  float: right !important;" class="fa-solid fa-chevron-up"></i>
+                                                            <span>Product Brand</span>
+                                                            <hr>
+                                                        </div>
+                                                        <div class="bodyaccor active">
+                                                            <ul style="list-style-type: none;padding-left: 0;justify-content:normal;height: max-content;">
+                                                                @{
+                                                                    var uniqueBrands = new List<string>();
+                                                                }
+
+                                                                @foreach (var item in products)
+                                                                {
+                                                                    @foreach (var items in item.ProductBrands)
+                                                                    {
+                                                                        @if (!uniqueBrands.Contains(items.Brand.Name))
+                                                                        {
+                                                                            uniqueBrands.Add(items.Brand.Name);
+                                                                            <li>
+                                                                                <label class="styled-checkbox translate style-gray">
+                                                                                    <input type="checkbox" name="brandIds" value="@items.Brand.Id" />
+                                                                                    <span class="el">
+                                                                                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M11.602 13.7599L13.014 15.1719L21.4795 6.7063L22.8938 8.12051L13.014 18.0003L6.65 11.6363L8.06421 10.2221L10.189 12.3469L11.6025 13.7594L11.602 13.7599ZM11.6037 10.9322L16.5563 5.97949L17.9666 7.38977L13.014 12.3424L11.6037 10.9322ZM8.77698 16.5873L7.36396 18.0003L1 11.6363L2.41421 10.2221L3.82723 11.6352L3.82604 11.6363L8.77698 16.5873Z"></path></svg>
+                                                                                    </span>
+                                                                                    <span>@items.Brand.Name</span>
+                                                                                </label>
+                                                                            </li>
+                                                                        }
+                                                                    }
+                                                                }
+
+
+                                                            </ul>
+                                                        </div>
+                                                    </div>
+                                                    <div class="vendor">
+                                                        <div class="headeraccor active p-3">
+                                                            <i style="  float: right !important;" class="fa-solid fa-chevron-up"></i>
+                                                            <span>Product Vendor</span>
+                                                            <hr>
+                                                        </div>
+                                                        <div class="bodyaccor active">
+                                                            <ul style="list-style-type: none;padding-left: 0;justify-content:normal;height: max-content;">
+                                                                @{
+                                                                    var uniqueVendors = new List<string>();
+                                                                }
+
+                                                                @foreach (var item in products)
+                                                                {
+                                                                    @foreach (var items in item.ProductVendors)
+                                                                    {
+                                                                        @if (!uniqueVendors.Contains(items.Vendor.Name))
+                                                                        {
+                                                                            uniqueVendors.Add(items.Vendor.Name);
+                                                                            <li>
+                                                                                <label class="styled-checkbox translate style-gray">
+                                                                                    <input type="checkbox" name="vendorIds" value="@items.Vendor.Id" />
+                                                                                    <span class="el">
+                                                                                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M11.602 13.7599L13.014 15.1719L21.4795 6.7063L22.8938 8.12051L13.014 18.0003L6.65 11.6363L8.06421 10.2221L10.189 12.3469L11.6025 13.7594L11.602 13.7599ZM11.6037 10.9322L16.5563 5.97949L17.9666 7.38977L13.014 12.3424L11.6037 10.9322ZM8.77698 16.5873L7.36396 18.0003L1 11.6363L2.41421 10.2221L3.82723 11.6352L3.82604 11.6363L8.77698 16.5873Z"></path></svg>
+                                                                                    </span>
+                                                                                    <span>@items.Vendor.Name</span>
+                                                                                </label>
+                                                                            </li>
+                                                                        }
+                                                                    }
+                                                                }
+
+
+                                                            </ul>
+                                                        </div>
+                                                    </div>
+                                                </form>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                    </div>
+
+
+                                    <i class="fa-solid fa-xmark" id="close-filter"></i>
+                                </div>
+                                <span>Open Filters</span>
+                            </li>
+                            <li style="margin-right: 2rem;">
+                                <select id="Featureda" class="form-select" style="
+                            border: none;
+
+                            background-color: #f6f6f6;
+                        " aria-label="Default select example">
+                                    <option value="Default" selected>Default</option>
+                                    <option value="Pricelow">Price,low to high</option>
+                                    <option value="PriceHigh">Price,high to low</option>
+                                </select>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="product">
+                        <div id="sss" class="row">
+                        @await Html.PartialAsync("_ShopPartial",products)
+
+                        </div>
+                  
+                    </div>
+                </div>
+        </section>
+        <script>
+            let filterIcon = document.querySelector('#filter-icon')
+            let filter = document.querySelector('.filter')
+            let closeFilter = document.querySelector('#close-filter')
+
+            filterIcon.onclick = () => {
+                filter.classList.add("active");
+            };
+
+            closeFilter.onclick = () => {
+                filter.classList.remove("active");
+            };
+
+
+
+
+
+
+
+            const rangeInput = document.querySelectorAll(".range-input input"),
+                priceInput = document.querySelectorAll(".price-input input"),
+                range = document.querySelector(".slider .progress");
+            let priceGap = 30;
+
+            priceInput.forEach((input) => {
+                input.addEventListener("input", (e) => {
+                    let minPrice = parseInt(priceInput[0].value),
+                        maxPrice = parseInt(priceInput[1].value);
+
+                    if (maxPrice - minPrice >= priceGap && maxPrice <= rangeInput[1].max) {
+                        if (e.target.className === "input-min") {
+                            rangeInput[0].value = minPrice;
+                            range.style.left = (minPrice / rangeInput[0].max) * 100 + "%";
+                        } else {
+                            rangeInput[1].value = maxPrice;
+                            range.style.right = 100 - (maxPrice / rangeInput[1].max) * 100 + "%";
+                        }
+                    }
+                });
+            });
+
+            rangeInput.forEach((input) => {
+                input.addEventListener("input", (e) => {
+                    let minVal = parseInt(rangeInput[0].value),
+                        maxVal = parseInt(rangeInput[1].value);
+
+                    if (maxVal - minVal < priceGap) {
+                        if (e.target.className === "range-min") {
+                            rangeInput[0].value = maxVal - priceGap;
+                        } else {
+                            rangeInput[1].value = minVal + priceGap;
+                        }
+                    } else {
+                        priceInput[0].value = minVal;
+                        priceInput[1].value = maxVal;
+                        range.style.left = (minVal / rangeInput[0].max) * 100 + "%";
+                        range.style.right = 100 - (maxVal / rangeInput[1].max) * 100 + "%";
+                    }
+                });
+            });
+
+
+            document.addEventListener('DOMContentLoaded', function () {
+                var headeraccorList = document.querySelectorAll('.headeraccor');
+
+                for (var i = 0; i < headeraccorList.length; i++) {
+                    headeraccorList[i].addEventListener('click', function () {
+                        var siblings = Array.from(this.parentNode.children);
+                        var bodyaccorList = Array.from(this.parentNode.querySelectorAll('.bodyaccor'));
+                        var icons = Array.from(this.parentNode.querySelectorAll('.headeraccor i'));
+                        var isActive = this.classList.contains('active');
+
+                        for (var j = 0; j < siblings.length; j++) {
+                            if (siblings[j] !== this) {
+                                var icon = siblings[j].querySelector('i');
+                                if (icon) {
+                                    icon.classList.remove('fa-chevron-up');
+                                    icon.classList.add('fa-chevron-down');
+                                }
+                            }
+                        }
+
+                        for (var k = 0; k < bodyaccorList.length; k++) {
+                            if (bodyaccorList[k] !== this.nextElementSibling) {
+                                bodyaccorList[k].style.display = 'none';
+                            }
+                        }
+
+                        var currentIcon = this.querySelector('i');
+                        if (currentIcon) {
+                            currentIcon.classList.toggle('fa-chevron-down');
+                            currentIcon.classList.toggle('fa-chevron-up');
+                        }
+
+                        var nextElement = this.nextElementSibling;
+                        if (nextElement) {
+                            nextElement.style.display = isActive ? 'none' : 'block';
+                        }
+
+                        this.classList.toggle('active');
+                    });
+                }
+            });
+
+
+
+
+
+
+
+            let field = document.querySelector('#sss');
+            let li = Array.from(field.children);
+            let select = document.getElementById('Featureda');
+            let ar = [];
+            for (let i of li) {
+                const last = i.lastElementChild;
+                if (last !== null) {
+                    const x = last.textContent.trim();
+                    const y = parseFloat(x.replace('$', ''));
+
+                    if (!isNaN(y)) {
+                        i.setAttribute('data-price', y);
+                        ar.push(i);
+                    }
+                }
+            }
+            select.onchange = sortingValue;
+
+            function sortingValue() {
+                if (this.value === 'Default') {
+                    while (field.firstChild) { field.removeChild(field.firstChild); }
+                    field.append(...ar);
+                }
+                if (this.value === 'Pricelow') {
+                    sortElem(field, li, true);
+                }
+                if (this.value === 'PriceHigh') {
+                    sortElem(field, li, false);
+                }
+            }
+
+            function sortElem(field, li, asc) {
+                let dm, sortli;
+                dm = asc ? 1 : -1;
+                sortli = li.sort((a, b) => {
+                    const ax = a.getAttribute('data-price');
+                    const bx = b.getAttribute('data-price');
+                    return ax > bx ? (1 * dm) : (-1 * dm);
+                });
+                while (field.firstChild) { field.removeChild(field.firstChild); }
+                field.append(...sortli);
+            }
+
+
+
+
+
+
+
+
+
+
+
+
+        document.querySelectorAll("#filterForm input").forEach(function (input) {
+            input.addEventListener("change", function () {
+                filterData();
+            });
+        });
+
+        document.getElementById("filterForm").addEventListener("submit", function (event) {
+            event.preventDefault();
+            filterData();
+        });
+
+        function filterData() {
+            var formData = new FormData(document.getElementById("filterForm"));
+
+            fetch('/Shop/FilterData', {
+                method: 'POST',
+                body: formData
+            })
+                .then(response => response.text())
+                .then(result => {
+                    document.getElementById("sss").innerHTML = result;
+                })
+                .catch(error => console.log(error));
+        }
+
+
+
+
+
+
+        </script>
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    </main>

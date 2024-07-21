@@ -1,0 +1,50 @@
+﻿@model Slider
+
+@{
+    ViewData["Title"] = "Delete";
+}
+<style>
+    .page-body-wrapper {
+        flex-direction: column !important;
+    }
+</style>
+<h1>Delete</h1>
+
+<div>
+    <h4>Slider</h4>
+    <hr />
+    <dl class="row">
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.ImagePath)
+        </dt>
+        <dd class = "col-sm-10">
+            <img style="height:150px;width:150px;object-fit:contain;border-radius:50%" src="/images/slider/@Html.DisplayFor(model => model.ImagePath)">
+
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Title)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Title)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Order)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Order)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.MiniDesc)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.MiniDesc)
+        </dd>
+    </dl>
+</div>
+<div>
+    <form asp-action="DeleteConfirmed">
+        <input type="hidden" asp-for="Id" />
+        <input type="submit" value="Delete" class="btn btn-danger" />
+        <a class="btn btn-success" asp-action="Index">Back to List</a>
+    </form>
+</div>

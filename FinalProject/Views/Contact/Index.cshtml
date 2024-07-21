@@ -1,0 +1,172 @@
+﻿@using FinalProject.Entities;
+@{
+    var sizecolor = ViewBag.SizeColor as List<Product>;
+
+}
+@if (TempData["Contact"] != null)
+{
+    <input type="hidden" id="contactJs" contact="@TempData["Contact"]!"></input>
+}
+<head>
+    <link rel="stylesheet" href="~/css/login.css">
+    <link rel="stylesheet" href="~/css/contact.css">
+</head>
+<main style="margin-bottom: 3rem;">
+    <div id="loading">
+        <div class="custom-loader"></div>
+    </div>
+    <div class="container hidden">
+        <div class="row">
+            <div style="flex-direction: column;" class="left col-lg-6">
+                <div class="image">
+
+                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3039.4286735655874!2d49.85394549999999!3d40.377190899999995!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x40307d079efb5163%3A0xc20aa51a5f0b5e01!2sCode%20Academy!5e0!3m2!1sen!2saz!4v1683279912588!5m2!1sen!2saz" width="670" height="325" style="border:0;border-radius: 20px;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                </div>
+                <div class="info">
+                    <div class="container">
+                        <div style="justify-content: center;" class="row">
+                            <div style="text-align: center;" class="col-lg-3">
+                                <svg width="30" height="45" viewBox="0 0 59 78" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <g clip-path="url(#clip0_3976_418)">
+                                        <path d="M29.5 0C13.2332 0 0 13.1479 0 29.3036C0 53.5007 27.5358 76.7349 28.7084 77.7124C28.9275 77.8975 29.2055 78 29.4933 78.0018C29.7811 78.0036 30.0604 77.9045 30.2817 77.7221C31.4544 76.7618 59 53.9273 59 29.3036C59 13.1479 45.7668 0 29.5 0ZM29.5049 75.1676C24.9791 71.1579 2.45833 50.1613 2.45833 29.3036C2.45833 14.4885 14.5902 2.4375 29.5 2.4375C44.4098 2.4375 56.5417 14.4885 56.5417 29.3036C56.5417 50.5148 34.043 71.2116 29.5049 75.1676Z" fill="black"></path>
+                                        <path d="M29.5 14.625C21.3654 14.625 14.75 21.1843 14.75 29.25C14.75 37.3157 21.3654 43.875 29.5 43.875C37.6346 43.875 44.25 37.3157 44.25 29.25C44.25 21.1843 37.6346 14.625 29.5 14.625ZM29.5 41.4375C22.7224 41.4375 17.2083 35.9702 17.2083 29.25C17.2083 22.5298 22.7224 17.0625 29.5 17.0625C36.2776 17.0625 41.7917 22.5298 41.7917 29.25C41.7917 35.9702 36.2776 41.4375 29.5 41.4375Z" fill="black"></path>
+                                    </g>
+                                    <defs>
+                                        <clipPath id="clip0_3976_418">
+                                            <rect width="59" height="78" fill="white"></rect>
+                                        </clipPath>
+                                    </defs>
+                                </svg><br>
+                                <span style="font-weight: bold;">Location:</span><br>
+                                <span style="font-size: 12px;color: gray;">  165th St, Jamaica, NY 11</span>
+                            </div>
+                            <div style="text-align: center;" class="col-lg-3">
+                                <svg width="30" height="45" viewBox="0 0 78 77" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <g clip-path="url(#clip0_3973_532)">
+                                        <path class="path--nofill" d="M76.7812 27.6719V75.7969H1.21875V27.6719L39 54.1406L76.7812 27.6719Z" stroke="black" stroke-width="2" stroke-linejoin="round"></path>
+                                        <path d="M1.21875 75.7969L30.4688 46.9219" stroke="black" stroke-width="2" stroke-linejoin="round"></path>
+                                        <path d="M76.7812 75.7969L47.5312 46.9219" stroke="black" stroke-width="2" stroke-linejoin="round"></path>
+                                        <path class="path--nofill" d="M10.9688 34.8906V10.8281L20.7188 1.20312H67.0312V34.8906" stroke="black" stroke-width="2" stroke-linejoin="round"></path>
+                                        <path d="M1.21875 27.6719L10.9688 18.0469" stroke="black" stroke-width="2" stroke-linejoin="round"></path>
+                                        <path d="M76.7812 27.6719L67.0312 18.0469" stroke="black" stroke-width="2" stroke-linejoin="round"></path>
+                                        <path class="path--nofill" d="M10.9688 10.8281H20.7188V1.20312L10.9688 10.8281Z" stroke="black" stroke-width="2" stroke-linejoin="round"></path>
+                                        <path d="M20.7188 18.0469H57.2812" stroke="black" stroke-width="2" stroke-linejoin="round"></path>
+                                        <path d="M20.7188 24.0625H57.2812" stroke="black" stroke-width="2" stroke-linejoin="round"></path>
+                                        <path d="M20.7188 30.0781H57.2812" stroke="black" stroke-width="2" stroke-linejoin="round"></path>
+                                    </g>
+                                    <defs>
+                                        <clipPath id="clip0_3973_532">
+                                            <rect width="78" height="77" fill="white"></rect>
+                                        </clipPath>
+                                    </defs>
+                                </svg><br>
+                                <span style="font-weight: bold;">Email:</span><br>
+                                <span style="font-size: 12px;color: gray;">eminra@code.edu.az</span>
+                            </div>
+                            <div style="text-align: center;" class="col-lg-3">
+                                <svg width="30" height="45" viewBox="0 0 78 78" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <g clip-path="url(#clip0_3979_445)">
+                                        <path d="M77.2322 52.6503L55.3312 43.8753C55.1424 43.7992 54.9375 43.7715 54.7353 43.795C54.533 43.8184 54.3399 43.8921 54.1734 44.0094L44.1919 51.1086C37.1553 46.7291 31.2211 40.7887 26.8491 33.7475L33.9666 23.833C34.0889 23.668 34.1676 23.4748 34.1953 23.2713C34.2229 23.0679 34.1988 22.8607 34.125 22.669L25.35 0.768112C25.2491 0.501358 25.0579 0.278429 24.8096 0.138134C24.5613 -0.00216073 24.2716 -0.0509357 23.9911 0.000299936L1.01156 4.39999C0.843306 4.42818 0.683198 4.49264 0.542344 4.58889C0.461524 4.63995 0.387767 4.70142 0.322969 4.77171C0.116177 4.99586 0.000936936 5.28939 0 5.59436C0.0290075 24.7876 7.66595 43.1866 21.2371 56.7589C34.8082 70.3312 53.2066 77.9697 72.3998 78.0003C72.7048 77.9994 72.9983 77.8841 73.2225 77.6773C73.2928 77.6125 73.3542 77.5388 73.4053 77.458C73.5016 77.3171 73.566 77.157 73.5942 76.9887L78 54.0092C78.0512 53.7286 78.0025 53.439 77.8622 53.1907C77.7219 52.9424 77.4989 52.7512 77.2322 52.6503V52.6503ZM71.3944 75.5628C53.196 75.2739 35.8239 67.916 22.9541 55.0462C10.0843 42.1764 2.72642 24.8043 2.4375 6.60592L23.4548 2.60233L31.5961 22.9555L24.375 32.9797C24.2452 33.178 24.1761 33.4099 24.1761 33.6469C24.1761 33.884 24.2452 34.1159 24.375 34.3142C29.1096 42.2294 35.7158 48.8607 43.613 53.6253C43.8153 53.7466 44.0486 53.8066 44.2844 53.798C44.5202 53.7893 44.7485 53.7124 44.9414 53.5765L55.0448 46.4042L75.398 54.5455L71.3944 75.5628Z" fill="black"></path>
+                                    </g>
+                                    <defs>
+                                        <clipPath id="clip0_3979_445">
+                                            <rect width="78" height="78" fill="white"></rect>
+                                        </clipPath>
+                                    </defs>
+                                </svg><br>
+                                <span style="font-weight: bold;">Phone:</span><br>
+                                <span style="font-size: 12px;color: gray;">+1-202-555-0158</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="right col-lg-6">
+                <div class="head">
+                    <h6>Let’s Talk</h6>
+                    <span>
+                        To request a quote our products, contact us directly or fill out the form and we will get back to you promptly.
+                    </span>
+                </div>
+                <div class="input">
+                    <form asp-action="Save">
+                        <label for="Name">Name</label><br>
+                        <input  required type="text" name="Name" id="Name" placeholder="Enter Your First Name"><br>
+
+
+                        <label for="Email">Email</label><br>
+                        <input required type="text" name="Email" id="Email" placeholder="Enter Your Email"><br>
+
+                        <label for="PhoneNumber">Phone Number</label><br>
+                        <input required type="text" name="PhoneNumber" id="PhoneNumber" placeholder="Enter Your Phone Number"><br>
+
+                        <label for="Comment">Comment</label><br>
+                        <input required type="text" name="Comment" id="Comment" placeholder="Comment"><br>
+
+
+                        <div style="display: block; width: 59%; border-radius: 22px;margin-top: 1rem;" class="btn btn-primary">
+                            <button style="
+    background: transparent;
+    border: none;
+    color: white;
+" type="submit">
+                                Send
+                            </button>
+                        </div>
+                    </form>
+           
+                </div>
+
+            </div>
+        </div>
+    </div>
+</main>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script>
+    $(document).ready(function () {
+        if ($("#contactJs").length) {
+            if ($("#contactJs").attr("contact").toLowerCase() == "true") {
+                toastr["success"]("SALAMLAR");
+
+                toastr.options = {
+                    closeButton: false,
+                    debug: false,
+                    newestOnTop: false,
+                    progressBar: true,
+                    positionClass: "toast-top-right",
+                    preventDuplicates: false,
+                    onclick: null,
+                    showDuration: "300",
+                    hideDuration: "1000",
+                    timeOut: "5000",
+                    extendedTimeOut: "1000",
+                    showEasing: "swing",
+                    hideEasing: "linear",
+                    showMethod: "fadeIn",
+                    hideMethod: "fadeOut"
+                };
+            }
+            else {
+                toastr["success"]("A message has been sent to admin");
+
+                toastr.options = {
+                    closeButton: false,
+                    debug: false,
+                    newestOnTop: false,
+                    progressBar: true,
+                    positionClass: "toast-top-right",
+                    preventDuplicates: false,
+                    onclick: null,
+                    showDuration: "300",
+                    hideDuration: "1000",
+                    timeOut: "5000",
+                    extendedTimeOut: "1000",
+                    showEasing: "swing",
+                    hideEasing: "linear",
+                    showMethod: "fadeIn",
+                    hideMethod: "fadeOut"
+                };
+            }
+        }
+    });
+</script>

@@ -1,0 +1,64 @@
+﻿@model List<BlogComment>
+@{
+    ViewData["Title"] = "Comments";
+}
+
+<h1>Comments</h1>
+
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                #
+            </th>
+            <th>
+                UserFullName
+            </th>
+            <th>
+                Text
+            </th>
+            <th>
+                Created Date
+            </th>
+            <th>
+                Status
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var comment in Model)
+        {
+            <tr>
+                <td>@comment.Id</td>
+                <td>@comment.User.FullName</td>
+                @if (comment.Text.Length < 100)
+                {
+                    <td>@comment.Text</td>
+                }
+                else
+                {
+                    <td>@comment.Text.Substring(0,97) ...</td>
+                }
+                <td>@comment.CreatedTime.ToString("dd mm yyyy HH:m")</td>
+                <td>@comment.IsAccess</td>
+                <td>
+                    @if (comment.IsAccess)
+                    {
+                        <a asp-controller="blog" asp-action="CommentReject" asp-route-id="@comment.Id" class="btn btn-danger">
+                            Reject
+                        </a>
+                    }
+                    else
+                    {
+                        <a asp-controller="blog" asp-action="CommentAccept" asp-route-id="@comment.Id" class="btn btn-success">
+                            Accept
+                        </a>
+
+                    }
+
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

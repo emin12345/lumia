@@ -1,0 +1,78 @@
+main {
+  background-color: #f6f6f6;
+}
+main .container .row .left {
+  padding: 51px 60px 0px 83px;
+  position: relative;
+  right: 6rem;
+  background-color: white;
+}
+main .container .row .left .form {
+  height: 100vh;
+}
+main .container .row .left .form .btn-primary {
+  height: 50px;
+}
+main .container .row .left .form h6 {
+  padding: 33px 0px 22px 7px;
+  font-weight: bold;
+  font-size: 20px;
+}
+main .container .row .left .form .mb-3 {
+  padding: 5px;
+}
+main .container .row .left .form .mb-3 .form-control {
+  height: 48px;
+}
+main .container .row .left .form .userinfo {
+  display: flex;
+}
+main .container .row .left .form .userinfo .mb-3 {
+  width: 50%;
+}
+main .container .row .right .item {
+  margin-top: 3rem;
+  padding: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+main .container .row .right .item .name-color {
+  position: relative;
+  right: 10rem;
+}
+main .container .row .right .item .name-color .name span {
+  font-weight: bold;
+}
+main .container .row .right .item .name-color .color span {
+  color: gray;
+  font-size: 14px;
+}
+main .container .row .right .item .image {
+  width: 64px;
+  height: 64px;
+  border-radius: 12px;
+  border: 1px solid #e3e3e3;
+  overflow: hidden;
+}
+main .container .row .right .item .image img {
+  width: 100%;
+}
+main .container .row .right .subtotal {
+  font-size: 20px;
+  margin-top: 3rem;
+}
+main .container .row .right .subtotal .total {
+  margin-left: 10px;
+}
+main .container .row .right .subtotal .total span {
+  font-weight: bold;
+}
+main .container .row .right .subtotal .price span {
+  font-weight: bold;
+  margin-left: 4px;
+}
+main .container .row .right .subtotal .price #azn {
+  color: gray;
+  font-size: 10px;
+}/*# sourceMappingURL=checkout.css.map */

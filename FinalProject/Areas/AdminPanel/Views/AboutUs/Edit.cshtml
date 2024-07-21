@@ -1,0 +1,52 @@
+﻿@model AboutUs
+<style>
+    .page-body-wrapper {
+        flex-direction: column !important;
+    }
+</style>
+<h1>Edit</h1>
+<h4>AboutUs</h4>
+<div>
+    <h3>
+        Current Image
+        <img src="/images/aboutus/@Model.ImagePath" style="height:150px;width:150px;object-fit:contain;border-radius:50%"></img>
+    </h3>
+</div>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Edit" enctype="multipart/form-data">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="Id" />
+            <div class="form-group">
+                <label asp-for="ImageFile" class="control-label"></label>
+                <input asp-for="ImageFile" class="form-control" />
+                <span asp-validation-for="ImageFile" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Author" class="control-label"></label>
+                <input asp-for="Author" class="form-control" />
+                <span asp-validation-for="Author" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Text" class="control-label"></label>
+                <input asp-for="Text" class="form-control" />
+                <span asp-validation-for="Text" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="IframeLink" class="control-label"></label>
+                <input asp-for="IframeLink" class="form-control" />
+                <span asp-validation-for="IframeLink" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a id="back" class="btn btn-success" asp-action="Index">Back to List</a>
+</div>
+

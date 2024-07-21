@@ -1,0 +1,39 @@
+﻿@using FinalProject.ViewModels;
+@model AccountVM
+<head>
+    <link rel="stylesheet" href="~/css/login.css">
+</head>
+
+<main>
+    <div id="loading">
+        <div class="custom-loader"></div>
+    </div>
+    <div class="container">
+        <div class="row">
+            <div class="left col-lg-6">
+                <div class="image">
+                    <img width="400px" src="~/images/login/account-01.webp" alt="">
+                </div>
+            </div>
+            <div class="right col-lg-6">
+                <div class="head">
+                    <h6>Sign In to Our Store</h6>
+                    <span>
+                        Login helps speed up the checkout process
+                    </span>
+                </div>
+                <div class="input">
+                    <form method="post">
+                        <label asp-for="User.Email">Enter Your Email</label>
+                        <input style="border: 1px #e7e7e7 solid;" asp-for="User.Email" class="form-control">
+                        <button  type="submit" class="btn btn-primary">Send Link</button>
+                    </form>
+                </div>
+                <a style="text-decoration: none;    text-decoration: none;
+                      text-align: center;
+                      margin-left: 54px;margin-top: 1rem;" asp-controller="Account" asp-action="Login">Return Back</a>
+
+            </div>
+        </div>
+    </div>
+</main>

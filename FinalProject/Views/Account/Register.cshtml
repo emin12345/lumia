@@ -1,0 +1,78 @@
+﻿@using FinalProject.ViewModels;
+@model RegisterVM
+<head>
+    <link rel="stylesheet" href="~/css/register.css">
+    <link rel="stylesheet" href="~/css/login.css">
+</head>
+
+<main>
+    <div id="loading">
+        <div class="custom-loader"></div>
+    </div>
+    <div style="margin-bottom:5rem" class="container">
+        <div class="row">
+            <div class="left col-lg-6">
+                <div class="image">
+                    <img width="400px" src="~/images/login/account-02.webp" alt="">
+                </div>
+            </div>
+            <div class="right col-lg-6">
+                <div class="head">
+                    <h6>Register to Our Store</h6>
+                    <span>
+                        Login helps speed up the checkout process
+                    </span>
+                </div>
+                <div class="input">
+					<form asp-action="Register" method="post">
+						<div asp-validation-summary="ModelOnly" class="alert alert-danger"></div>
+						<div class="col-sm-9">
+							<div class="form-group">
+								<label asp-for="Firstname">Firstname</label>
+								<input style="border: 1px #e7e7e7 solid;" asp-for="Firstname" class="form-control" placeholder="First name">
+							</div>
+						</div>
+						<div style="display:flex" class="col-sm-9">
+							<div class="form-group">
+								<label asp-for="Lastname">Lastname</label>
+								<input style="border: 1px #e7e7e7 solid;" asp-for="Lastname" class="form-control" placeholder="Lastname">
+							</div>
+						<div class="form-group">
+							<label asp-for="Email">Email</label>
+								<input style="border: 1px #e7e7e7 solid;" asp-for="Email" class="form-control" placeholder="Email">
+						</div>
+						</div>
+
+						<div class="col-sm-9">
+							<label asp-for="Username">Username</label>
+							<input style="border: 1px #e7e7e7 solid;width:75%" asp-for="Username" class="form-control" placeholder="Username">
+						</div>
+						<div class="col-sm-9">
+							<label asp-for="PhoneNumber"></label>
+							<input style="border: 1px #e7e7e7 solid;width:75%" asp-for="PhoneNumber" class="form-control" placeholder="PhoneNumber">
+						</div>
+						<div class="form-group">
+							<label asp-for="Password">Password</label>
+							<input style="border: 1px #e7e7e7 solid;" asp-for="Password" class="form-control" placeholder="Password">
+						</div>
+						<div class="form-group">
+							<label asp-for="ConfirmPassword">Password</label>
+							<input style="border: 1px #e7e7e7 solid;" asp-for="ConfirmPassword" class="form-control" placeholder="ConfirmPassword">
+						</div>
+	
+						<div style="float:left" class="text-center">
+							<button style="
+    border-radius: 20px;
+" class="btn btn-primary">
+								Create Account
+							</button>
+						</div>
+					</form>
+                </div>
+
+                <span style="text-align: center;margin-left: 3rem;margin-top: 1rem;">Already have an account?<a style="text-decoration:none;font-size: 14px;margin-left: 4px;" asp-controller="Account" asp-action="Login">Login Here</a></span>
+            </div>
+        </div>
+    </div>
+
+</main>

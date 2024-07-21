@@ -1,0 +1,66 @@
+﻿@model Order
+@{
+    ViewData["Title"] = "Edit";
+}
+<style>
+    .card-body{
+        margin-top: 4rem;
+    }
+</style>
+
+<div class="card" style="width: 18rem;">
+    <div class="card-body">
+        <h5 class="card-title">@Model.User.FullName</h5>
+        <p class="card-text">Email:@Model.User.Email</p>
+        <p class="card-text">Country:@Model.Country</p>
+        <p class="card-text">State:@Model.State</p>
+        <p class="card-text">Adress:@Model.Adress</p>
+        <p class="card-text">Date:@Model.Date.ToString("dd.MMMM.yyyy HH:mm")</p>
+        <ul style="list-style-type:none">
+            <li>
+                @foreach (OrderItem item in Model.OrderItems)
+                {
+                <li>
+                        @item.Name
+                </li>
+                <li>
+                    $@item.Price
+                </li>
+                <hr></hr>
+                }
+            </li>
+            @if (Model.Status == null)
+            {
+                <td>
+                    <button class="btn btn-warning">
+                        Pending
+                    </button>
+                </td>
+            }
+            else if (Model.Status == true)
+            {
+                <td>
+                    <button class="btn btn-success">
+                        Accepted
+                    </button>
+                </td>
+            }
+            else
+            {
+                <td>
+                    <button class="btn btn-danger">
+                        Rejected
+                    </button>
+                </td>
+            }
+        </ul>
+
+        <p class="card-text">TotalPrice:@Model.TotalPrice</p>
+    </div>
+</div>
+
+<a style="display:flex;justify-content:center;align-items:center;width:289px;height: 9%;top: 18rem;position: relative;" class="btn btn-success" asp-controller="Order" asp-action="Accept" asp-route-id="@Model.Id">Accept</a>
+<a style="display:flex;justify-content:center;align-items:center;width:289px;height: 9%;top: 18rem;position: relative;" class="btn btn-danger" asp-controller="Order" asp-action="Reject" asp-route-id="@Model.Id">Reject</a>
+
+
+

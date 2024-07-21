@@ -1,0 +1,58 @@
+﻿@model AboutUs
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.ImagePath)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Text)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Author)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.IframeLink)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>
+                <img style="width:150px;height:150px;object-fit:contain" src="/images/aboutus/@Model.ImagePath">
+
+            </td>
+            <td>
+                @{
+                    string text = Model.Text.Length > 15 ? string.Concat(Model.Text.Substring(0, 15), "...") : Model.Text;
+                }
+
+                @Html.DisplayFor(modelItem => text)
+
+
+
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => @Model.Author)
+            </td>
+            <td>
+                @{
+                    string link = Model.IframeLink.Length > 15 ? string.Concat(Model.IframeLink.Substring(0, 15), "...") : Model.IframeLink;
+                }
+
+                @Html.DisplayFor(modelItem => link)
+            </td>
+            <td>
+                <button class="btn btn-warning">
+                    <a style="text-decoration:none;color:white" asp-action="Edit" asp-route-id="@Model.Id">Edit</a>
+                </button>
+                <button class="btn btn-primary">
+                    <a style="text-decoration:none;color:white" asp-action="Detail" asp-route-id="@Model.Id">Detail</a>
+                </button>
+
+            </td>
+        </tr>
+    </tbody>
+</table>

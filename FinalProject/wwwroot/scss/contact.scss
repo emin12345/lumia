@@ -1,0 +1,48 @@
+@media screen and (max-width: 992px){
+    main{
+        .container{
+            .row{
+                .left{
+                    .info{
+                        .container{
+                            .row{
+                                position: relative;
+                                left: 8rem;
+                            }
+                        }
+                    }
+                    .image{
+                        width: 100%;
+                        iframe{
+                            width: 100%;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+@media screen and (max-width: 399px){
+ main{
+    .container{
+        .row{
+            .left{
+                .container{
+                    .row{
+                        left: 11rem !important;
+                        top: 2rem;
+                        .col-lg-3{
+                            margin-right: 3rem;
+                        }
+                    }
+                }
+            }
+            .right{        
+            justify-content: flex-start;
+            }
+        }
+    }
+ }
+}
+

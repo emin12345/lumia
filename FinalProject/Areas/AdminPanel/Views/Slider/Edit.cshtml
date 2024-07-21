@@ -1,0 +1,53 @@
+﻿@model Slider
+<style>
+    .page-body-wrapper {
+        flex-direction: column !important;
+    }
+</style>
+<h1>Edit</h1>
+
+<h4>Slider</h4>
+<div>
+    <h3>
+        Current Image
+        <img src="/images/slider/@Model.ImagePath" style="height:150px;width:150px;object-fit:contain;border-radius:50%"></img>
+    </h3>
+</div>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Edit" enctype="multipart/form-data">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="Id" />
+            <div class="form-group">
+                <label asp-for="ImageFile" class="control-label"></label>
+                <input asp-for="ImageFile" class="form-control" />
+                <span asp-validation-for="ImageFile" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Title" class="control-label"></label>
+                <input asp-for="Title" class="form-control" />
+                <span asp-validation-for="Title" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Order" class="control-label"></label>
+                <input asp-for="Order" class="form-control" />
+                <span asp-validation-for="Order" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="MiniDesc" class="control-label"></label>
+                <input asp-for="MiniDesc" class="form-control" />
+                <span asp-validation-for="MiniDesc" class="text-danger"></span>
+            </div>
+          
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a class="btn btn-success" asp-action="Index">Back to List</a>
+</div>
+

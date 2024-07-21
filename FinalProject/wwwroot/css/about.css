@@ -1,0 +1,238 @@
+﻿main {
+    background-color: #f6f6f6;
+    padding-bottom: 8rem;
+}
+
+    main #jack {
+        padding-top: 5rem;
+        background-color: #f6f6f6;
+    }
+
+        main #jack .container .wrapper {
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+            position: relative;
+        }
+
+            main #jack .container .wrapper .content {
+                position: absolute;
+                background-color: white;
+                border-radius: 15px;
+                width: 400px;
+                height: 469px;
+                left: 0;
+                box-shadow: 0 0 14px rgba(0, 0, 0, var(--global-box-shadow, 0.04));
+                padding: 65px 60px 75px 70px;
+            }
+
+                main #jack .container .wrapper .content svg {
+                    position: absolute;
+                    left: 30px;
+                    top: 30px;
+                }
+
+                main #jack .container .wrapper .content .text {
+                    margin-bottom: 1rem;
+                }
+
+                    main #jack .container .wrapper .content .text span {
+                        font-size: 19px;
+                    }
+
+                main #jack .container .wrapper .content .authorsign {
+                    display: flex;
+                    align-items: center;
+                }
+
+                    main #jack .container .wrapper .content .authorsign .author span {
+                        font-weight: 700;
+                        font-size: 13px;
+                        display: block;
+                        width: 89px;
+                    }
+
+            main #jack .container .wrapper .image {
+                width: 975px;
+                height: 649px;
+            }
+
+                main #jack .container .wrapper .image img {
+                    width: 100%;
+                    overflow: hidden;
+                    border-radius: 15px;
+                }
+
+    main #service {
+        padding-top: 2rem;
+    }
+
+        main #service .container .row .col-lg-3 {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+            main #service .container .row .col-lg-3 span {
+                font-weight: 700;
+                text-align: center;
+                display: block;
+                width: 141px;
+            }
+
+    main #video {
+        padding-top: 6rem;
+    }
+
+        main #video .header {
+            text-align: center;
+        }
+
+            main #video .header h6 {
+                font-weight: 700;
+                font-size: 25px;
+            }
+
+            main #video .header .text span {
+                display: block;
+                width: 966px;
+                margin: auto;
+            }
+
+            main #video .header .links {
+                padding-top: 1rem;
+                margin-top: 1rem;
+            }
+
+                main #video .header .links ul {
+                    margin-bottom: 0px !important;
+                    justify-content: center;
+                    display: flex;
+                }
+
+                    main #video .header .links ul li {
+                        margin-left: 1rem;
+                        cursor: pointer;
+                        transition: 0.3s;
+                    }
+
+        main #video .video {
+            padding-top: 5rem;
+        }
+
+            main #video .video iframe {
+                display: flex;
+                margin: auto;
+                border-radius: 25px;
+            }
+
+    main #whychooseyou {
+        margin-bottom: 5rem;
+        padding-top: 5rem;
+    }
+
+        main #whychooseyou .container h6 {
+            text-align: center;
+            font-size: 27px;
+            font-weight: 700;
+            margin-bottom: 3rem;
+        }
+
+    main #shopby .text {
+        margin-bottom: 2rem;
+    }
+
+    main #shopby span {
+        width: 700px;
+        text-align: center;
+        display: block;
+        margin: auto;
+    }
+
+@media screen and (max-width: 992px) {
+    #jack .container .wrapper {
+        display: flex;
+        position: relative;
+        flex-direction: column-reverse;
+    }
+
+        #jack .container .wrapper .content {
+            width: 100% !important;
+            height: auto !important;
+            position: static !important;
+        }
+
+            #jack .container .wrapper .content svg {
+                position: relative !important;
+                top: -2rem !important;
+                left: -1rem !important;
+            }
+
+            #jack .container .wrapper .content .authorsign {
+                justify-content: space-between !important;
+            }
+
+        #jack .container .wrapper .image {
+            width: 100% !important;
+            height: auto !important;
+            margin-bottom: 2rem;
+        }
+
+    #service .container .row .col-lg-3 {
+        margin-top: 2rem;
+    }
+
+        #service .container .row .col-lg-3:nth-child(4) {
+            display: none;
+        }
+
+    #video .text span {
+        width: 100% !important;
+    }
+
+    #video iframe {
+        width: 90% !important;
+        height: 413px;
+    }
+
+    #whychooseyou .container .col-lg-4 {
+        margin-bottom: 3rem;
+    }
+}
+
+@media screen and (max-width: 399px) {
+    #jack .container .wrapper .content {
+        padding: 69px 41px 48px 42px !important;
+    }
+
+    #service .container .row {
+        justify-content: center;
+    }
+
+        #service .container .row .col-lg-3 {
+            width: auto;
+        }
+
+            #service .container .row .col-lg-3 span {
+                font-size: 14px !important;
+            }
+
+            #service .container .row .col-lg-3:nth-child(4) {
+                display: initial;
+                display: flex;
+            }
+
+    #video .text span {
+        width: 100% !important;
+    }
+
+    #video iframe {
+        width: 90% !important;
+        height: 201px !important;
+    }
+
+    #shopby span {
+        width: 100% !important;
+    }
+}
+/*# sourceMappingURL=aboutus.css.map */

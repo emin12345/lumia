@@ -1,0 +1,324 @@
+﻿
+@model List<Order>
+@{
+    var categoryProducts = ViewBag.CategoryProducts as List<Product>;
+    var messages = ViewBag.Messages as List<ContactUs>;
+    var categoryCounts = ViewBag.CategoryCounts as List<Product>;
+    var blogcomment = ViewBag.BlogComment as List<BlogComment>;
+}
+<head>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<div class="main-panel">
+    <div class="content-wrapper">
+       
+        <div class="row">
+            <div class="col-xl-4 col-sm-6 grid-margin stretch-card">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-9">
+                                <div class="d-flex align-items-center align-self-start">
+
+                                    <h3 class="mb-0">@ViewBag.UserCount</h3>
+                                    <p class="text-success ml-2 mb-0 font-weight-medium"></p>
+                                </div>
+                            </div>
+                           
+                        </div>
+                        <h6 class="text-muted font-weight-normal">Users</h6>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xl-4 col-sm-6 grid-margin stretch-card">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-9">
+                                <div class="d-flex align-items-center align-self-start">
+                                    <h3 class="mb-0">@ViewBag.ProductsCount</h3>
+                                    
+                                </div>
+                            </div>
+                            <div class="col-3">
+                               
+                            </div>
+                        </div>
+                        <h6 class="text-muted font-weight-normal">Products</h6>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xl-4 col-sm-6 grid-margin stretch-card">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-9">
+                                <div class="d-flex align-items-center align-self-start">
+                                    <h3 class="mb-0">@ViewBag.MostSoldProductName</h3>
+                              
+                                </div>
+                            </div>
+                            <div class="col-3">
+                                <div class="icon icon-box-success ">
+                                    <span class="mdi mdi-arrow-top-right icon-item"></span>
+                                </div>
+                            </div>
+                        </div>
+                        <h6 class="text-muted font-weight-normal">Best selling product</h6>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-4 grid-margin stretch-card">
+                <div class="card">
+                    <div class="card-body">
+                        <h4 class="card-title">Categories</h4>
+                        <canvas id="CategoryCanvas"></canvas>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-8 grid-margin stretch-card">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="d-flex flex-row justify-content-between">
+                            <h4 class="card-title mb-1">Open Projects</h4>
+                            <p class="text-muted mb-1">Comments</p>
+                        </div>
+                        <div class="row">
+                            <div class="col-12">
+                                @foreach (var item in blogcomment)
+                                {
+                                    <div class="preview-list">
+                                        <div class="preview-item border-bottom">
+                                            <div class="preview-thumbnail">
+                                               <img style="border-radius:50%" src="~/images/userimage/user.jpg"></img>
+                                            </div>
+                                            <div class="preview-item-content d-sm-flex flex-grow">
+                                                <div class="flex-grow">
+                                                    <h6 class="preview-subject">@item.User.FullName</h6>
+                                                    <p class="text-muted mb-0">@item.Text</p>
+                                                </div>
+                                                <div class="mr-auto text-sm-right pt-2 pt-sm-0">
+                                                    @{
+                                                        TimeSpan timeSinceCreation = DateTime.Now - item.CreatedTime;
+                                                        string timeAgo;
+
+                                                        if (timeSinceCreation.TotalMinutes < 1)
+                                                        {
+                                                            timeAgo = "just now";
+                                                        }
+                                                        else if (timeSinceCreation.TotalHours < 1)
+                                                        {
+                                                            int minutes = (int)timeSinceCreation.TotalMinutes;
+                                                            timeAgo = $"{minutes} {(minutes == 1 ? "minute" : "minutes")} ago";
+                                                        }
+                                                        else if (timeSinceCreation.TotalDays < 1)
+                                                        {
+                                                            int hours = (int)timeSinceCreation.TotalHours;
+                                                            timeAgo = $"{hours} {(hours == 1 ? "hour" : "hours")} ago";
+                                                        }
+                                                        else
+                                                        {
+                                                            int days = (int)timeSinceCreation.TotalDays;
+                                                            timeAgo = $"{days} {(days == 1 ? "day" : "days")} ago";
+                                                        }
+                                                    }
+                                                    <p class="text-muted">@timeAgo</p>
+
+                                                  
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                }
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-4 grid-margin">
+                <div class="card">
+                    <div class="card-body">
+                        <h5>Sold Products</h5>
+                        <div class="row">
+                            <div class="col-8 col-sm-12 col-xl-8 my-auto">
+                                <div class="d-flex d-sm-block d-md-flex align-items-center">
+                                    <h2 class="mb-0">@ViewBag.OrderCountAdminPage</h2>
+                                </div>
+                            </div>
+                            <div class="col-4 col-sm-12 col-xl-4 text-center text-xl-right">
+                                <i class="icon-lg mdi mdi-codepen text-primary ml-auto"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-4 grid-margin">
+                <div class="card">
+                    <div class="card-body">
+                        <h5>Total price of the products sold</h5>
+                        <div class="row">
+                            <div class="col-8 col-sm-12 col-xl-8 my-auto">
+                                <div class="d-flex d-sm-block d-md-flex align-items-center">
+                                    <h2 class="mb-0">₼@ViewBag.TotalOrderPrices</h2>
+                                    
+                                </div>
+                               
+                            </div>
+                            <div class="col-4 col-sm-12 col-xl-4 text-center text-xl-right">
+                                <i class="icon-lg mdi mdi-wallet-travel text-danger ml-auto"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-4 grid-margin">
+                <div class="card">
+                    <div class="card-body">
+                        <h5>Subscribe</h5>
+                        <div class="row">
+                            <div class="col-8 col-sm-12 col-xl-8 my-auto">
+                                <div class="d-flex d-sm-block d-md-flex align-items-center">
+                                    <h2 class="mb-0">@ViewBag.Subscribe</h2>
+                                </div>
+                            </div>
+                            <div class="col-4 col-sm-12 col-xl-4 text-center text-xl-right">
+                                <i class="icon-lg mdi mdi-monitor text-success ml-auto"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    @*     <div class="row ">
+            <div class="col-12 grid-margin">
+                @if(Model is not null)
+                {
+                    <div class="card">
+                        <div class="card-body">
+                            <h4 class="card-title">Order Status</h4>
+                            <div class="table-responsive">
+                                <table class="table">
+                                    <thead>
+                                        <tr>
+                                            <th> Id </th>
+                                            <th> Country </th>
+                                            <th> State </th>
+                                            <th> Date </th>
+                                            <th> Total Price </th>
+                                            <th> Payment Status </th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @foreach (Order order in Model)
+                                        {
+                                            <tr>
+                                                <td>
+                                                    @order.Id
+                                                </td>
+
+                                                <td>
+                                                    @order.Country
+                                                </td>
+                                                <td>
+                                                    @order.State
+                                                </td>
+                                                <td>
+                                                    @order.Date
+                                                </td>
+
+                                                <td>
+                                                    @order.TotalPrice
+                                                </td>
+                                                <td>
+                                                    @if (@order.Status == null)
+                                                    {
+
+                                                        <div class="badge badge-outline-warning">Pending</div>
+
+                                                    }
+                                                    @if (order.Status == false)
+                                                    {
+                                                        <div class="badge badge-outline-danger">Rejected</div>
+                                                    }
+                                                    @if (order.Status == true)
+                                                    {
+                                                        <div class="badge badge-outline-success">Accepted</div>
+                                                    }
+                                                </td>
+
+                                            </tr>
+                                        }
+
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                } 
+            </div>
+        </div> *@
+     
+  
+    </div>
+    <!-- content-wrapper ends -->
+    <!-- partial:partials/_footer.html -->
+    <footer class="footer">
+      
+    </footer>
+    <!-- partial -->
+</div>
+
+
+
+
+
+
+<script>
+
+    var labelArr=[]
+    @foreach (var product in categoryProducts)
+    {
+
+        @foreach (var category in product.ProductCategories.Distinct())
+        {
+            
+            @:labelArr.push('@category.Category.Name')
+        }
+      
+    }
+      labelArr =[...new Set(labelArr)];
+
+
+
+    women = @ViewBag.WomenCount;
+    men = @ViewBag.MenCount
+
+    
+
+
+
+
+    var ctx = document.getElementById('CategoryCanvas').getContext('2d');
+    var myChart = new Chart(ctx, {
+        type: 'pie',
+        data: {
+            labels: labelArr,
+            datasets: [{
+                label: 'Category',
+                data: [women,men],
+                backgroundColor: ['gray', 'white']
+            }]
+        },
+        options: {
+            scales: {
+                y: {
+                    beginAtZero: true
+                }
+            }
+        }
+    });
+</script>

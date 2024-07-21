@@ -1,0 +1,61 @@
+﻿@model List<Order> 
+@using FinalProject.Model
+<head>
+    <link rel="stylesheet" href="./css/orderhistory.css">
+</head>
+<style>
+    .table{
+        height:100vh !important
+    }
+</style>
+<main class="table">
+    <div id="loading">
+        <div class="custom-loader"></div>
+    </div>
+    <section class="table__header">
+        <h1 style="margin: auto;margin-bottom: 5rem;">Order History</h1>
+
+    </section>
+    <section class="table__body">
+        <table>
+            <thead>
+                <tr>
+                    <th> Id </th>
+                    <th>Name</th>
+                    <th> State</th>
+                    <th> Order Date</th>
+                    <th> Status</th>
+                    <th> Amount</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (Order order in Model)
+                {
+                    <tr>
+                        <td> @order.Id </td>
+                        <td>@User.Identity.Name</td>
+                        <td> @order.State </td>
+                        <td> @order.Date </td>
+                        <td>
+                            @if (order.Status==null)
+                            {
+                                <p class="status pending">Pending</p>
+                            }
+                            else if(order.Status==true)
+                            {
+                                <p class="status shipped">Accepted</p>
+                            }
+                            else if (order.Status == false)
+                            {
+                                <p class="status cancelled">Rejected</p>
+                            }
+                        </td>
+                        <td> <strong> ₼@order.TotalPrice </strong></td>
+                    </tr>
+                }
+             
+
+            </tbody>
+        </table>
+    </section>
+</main>

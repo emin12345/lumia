@@ -1,0 +1,72 @@
+﻿@model IEnumerable<Slider>
+<style>
+    #create {
+        position: relative;
+        width: 100px;
+        top: 6rem;
+        left: 4rem;
+        display: block;
+        text-decoration: none;
+        transition: 0.3s;
+        margin-bottom:5rem;
+    }
+
+    #create {
+        transition:0.3s;
+        text-decoration:none;
+    }
+
+    #create:hover{
+        color:white
+    }
+</style>
+<p>
+    <a id="create" asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.ImagePath)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Title)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Order)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.MiniDesc)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    <img style="width:150px;height:150px;object-fit:contain" src="/images/slider/@item.ImagePath">
+                </td>
+                <td>
+                    @(item.Title.Length > 15 ? string.Concat(item.Title.Substring(0, 15), "...") : item.Title)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Order)
+                </td>
+                <td>
+                    @(item.MiniDesc.Length > 15 ? string.Concat(item.MiniDesc.Substring(0, 15), "...") : item.MiniDesc)
+                </td>
+                <td>
+                    <button class="btn btn-warning">
+                        <a style="text-decoration:none;color:white" asp-action="Edit" asp-route-id="@item.Id">Edit</a>
+                    </button>
+                    <button class="btn btn-danger">
+                        <a style="text-decoration:none;color:white" asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                    </button>
+                  
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

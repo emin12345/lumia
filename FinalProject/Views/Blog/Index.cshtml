@@ -1,0 +1,129 @@
+﻿@using FinalProject.Entities;
+@model List<Blog>
+<head>
+    <link rel="stylesheet" href="~/css/blog.css">
+</head>
+<main>
+    <div id="loading" >
+        <div class="custom-loader"></div>
+    </div>
+    <div class="container">
+        <div class="row">
+            <div class="header">
+                <h6>News</h6>
+                <a style="text-decoration:none;float:right;" asp-controller="Blog" asp-action="Create">
+                    <div class="btn btn-primary">Create Blog</div>
+                </a>
+            </div>
+            <div class="blogs">
+                <div class="container">
+                    <div class="row">
+                        @foreach (var item in Model)
+                        {
+                           if (item.Accept==true)
+                            {
+                                <div class="col-lg-12 col-md-12 hidden">
+                                    <div class="image">
+                                        <a asp-controller="Blog" asp-action="Detail" asp-route-id="@item.Id"><img src="~/images/blogs/@item.ImagePath" alt=""></a>
+                                        <div class="datetime">
+                                            @{
+                                                string createdTimeFormatted = item.CreatedTime.ToString("MMM d, yyyy");
+                                                string day = item.CreatedTime.ToString("dd");
+                                                string month = item.CreatedTime.ToString("MMM");
+                                            }
+                                            <div class="time">
+                                                <span>@day</span>
+                                                <span>@month</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="title">
+                                        <div class="head">
+                                            <a href="">
+                                                @item.Name
+                                            </a>
+                                        </div>
+                                        <div class="date">
+                                            <span>Date:</span>@item.CreatedTime.ToString("MMM d,yyyy")
+                                        </div>
+                                        <div class="content">
+                                            <span>@item.Description</span>
+                                        </div>
+                                        <div class="comment-button">
+                                            <div class="btn btn-primary">
+                                                <a href="">READ ARTICLE</a>
+                                            </div>
+                                            <div class="comment">
+                                                <a href="">
+                                                    <svg width="15" height="15" version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 512 512" style="enable-background:new 0 0 512 512;" xml:space="preserve">
+                                                    <g>
+                                                    <g>
+                                                    <path d="M448,0H64C28.704,0,0,28.704,0,64v432c0,6.016,3.36,11.552,8.736,14.272C11.04,511.424,13.536,512,16,512
+                                                        c3.328,0,6.656-1.056,9.44-3.104L152.416,416H448c35.296,0,64-28.704,64-64V64C512,28.704,483.296,0,448,0z M480,352
+                                                        c0,17.632-14.336,32-32,32H147.2c-3.392,0-6.72,1.088-9.44,3.104L32,464.48V64c0-17.632,14.336-32,32-32h384
+                                                        c17.664,0,32,14.368,32,32V352z"></path>
+                                                                </g>
+                                                            </g>
+                                                    <g>
+                                                            </g>
+                                                    <g>
+                                                            </g>
+                                                    <g>
+                                                            </g>
+                                                    <g>
+                                                            </g>
+                                                    <g>
+                                                            </g>
+                                                    <g>
+                                                            </g>
+                                                    <g>
+                                                            </g>
+                                                    <g>
+                                                            </g>
+                                                    <g>
+                                                            </g>
+                                                    <g>
+                                                            </g>
+                                                    <g>
+                                                            </g>
+                                                    <g>
+                                                            </g>
+                                                    <g>
+                                                            </g>
+                                                    <g>
+                                                            </g>
+                                                    <g>
+                                                            </g>
+                                                        </svg>
+                                                    <div class="count">@item.BlogComments.Where(f => f.IsAccess == true).ToList().Count Comments</div>
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            }
+                        }
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <nav id="pagination" class="mt-3 d-flex justify-content-center" aria-label="...">
+        <ul class="pagination">
+            <li class="page-item  @(ViewBag.CurrentPage == 1 ? "disabled" : "")">
+                <a class="page-link" asp-action="Index" asp-route-page="@(ViewBag.CurrentPage-1)" tabindex="-1">Previous</a>
+            </li>
+            @for (int i = 1; i <= ViewBag.TotalPage; i++)
+            {
+                <li class="page-item @(i==ViewBag.CurrentPage ? "active pointerNone" : "")">
+                    <a class="page-link" asp-action="Index" asp-route-page="@i">@i</a>
+                </li>
+            }
+
+            <li class="page-item @(ViewBag.TotalPage == ViewBag.CurrentPage ? "disabled" : "")">
+                <a class="page-link" asp-action="Index" asp-route-page="@(ViewBag.CurrentPage+1)">Next</a>
+            </li>
+        </ul>
+    </nav>
+</main>

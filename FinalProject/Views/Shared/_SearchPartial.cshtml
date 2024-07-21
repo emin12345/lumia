@@ -1,0 +1,64 @@
+﻿@model List<Product>
+
+@using FinalProject.Entities;
+<style>
+   
+    .image img{
+            width: 70px !important;
+            height: 94px !important;
+            border-radius: 8px !important;
+            margin-left:0rem !important;
+            object-fit: contain;
+
+    }
+
+    .right .item {
+        display: flex !important;
+        height:100% !important;
+        height: 100% !important;
+        align-items: center !important;
+        justify-content: space-evenly !important;
+        background: white !important;
+        height: 115px !important;
+        width: 215px !important;
+        border-radius: 7px !important;
+        margin-bottom:1rem;
+
+    }
+    .name-color{
+        display: flex !important;
+        height: 66px !important;
+        align-items: center !important;
+        flex-direction: column !important;
+        justify-content: center !important;
+
+    }
+    
+</style>
+
+
+<div class="right col-lg-6 animate__animated animate__fadeInLeft">
+
+        @foreach (var item in Model)
+        {
+            <a style="text-decoration:none;color:black" asp-controller="Product" asp-action="Detail" asp-route-id="@item.Id">
+            <div class="item">
+                <div class="image">
+                    <img src="~/images/products/@item.ProductImages.FirstOrDefault(p=>p.IsMain==true)?.Path" alt="">
+                </div>
+                <div class="name-color">
+                    <div style="
+    font-size: 12px;
+    font-weight: bold;
+" class="name">
+                        <span>@item.Name</span>
+                    </div>
+                    <div style="font-size:10px" class="color">
+                        <span>Black / L
+                        </span>
+                    </div>
+                    <div class="price"><span>₼@item.Price</span></div>
+                </div>
+            </div>
+            </a>
+        }

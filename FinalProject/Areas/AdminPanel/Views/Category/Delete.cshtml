@@ -1,0 +1,37 @@
+﻿@model Category
+
+@{
+    ViewData["Title"] = "Delete";
+}
+<style>
+    form {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+    }
+
+    h2 {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+    }
+</style>
+<h2>
+    The Category you want to delete: @Model.Name
+</h2>
+
+<form method="post" asp-action="DeleteConfirmed" asp-route-id="@Model.Id">
+    <div class="form-group">
+        <p>
+            Are you sure you want to delete the Category?
+        </p>
+        <button type="submit" class="btn btn-danger">
+            Yes, Delete
+        </button>
+        <a asp-action="Index" class="btn btn-primary">
+            No, Go Back
+        </a>
+    </div>
+</form>

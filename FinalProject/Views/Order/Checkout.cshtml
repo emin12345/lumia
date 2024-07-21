@@ -1,0 +1,101 @@
+﻿@using FinalProject.Entities;
+@using FinalProject.ViewModels;
+@inject FinalProject.Services.LayoutService layoutService
+@model OrderVM
+@{
+    var sizecolor = ViewBag.SizeColor as List<Product>;
+
+}
+<head>
+    <link rel="stylesheet" href="~/css/checkout.css">
+</head>
+<main>
+    <div id="loading">
+        <div class="custom-loader"></div>
+    </div>
+    <div class="container">
+        <div class="row">
+            <div class="left col-lg-6">
+                <div class="form">
+                    <h6>Shipping address</h6>
+                    <form asp-action="Checkout">
+                        <div asp-validation-summary="ModelOnly" class="alert alert-danger"></div>
+                        <div class="mb-3">
+                            <input asp-for="Country" type="text" class="form-control" placeholder="Country">
+                        </div>
+                        <div class="userinfo">
+                            <div class="mb-3">
+                                <input asp-for="Fullname" type="text" class="form-control" placeholder="Fullname">
+                            </div>
+                            <div class="mb-3">
+                                <input asp-for="Username" type="text" class="form-control" placeholder="Username">
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <input asp-for="Email" type="email" class="form-control" placeholder="Email">
+                        </div>
+                        <div class="mb-3">
+                            <input asp-for="Address" type="text" class="form-control" placeholder="Adress">
+                        </div>
+                        <div class="mb-3">
+                            <input asp-for="State" type="text" class="form-control" placeholder="State">
+                        </div>
+                        <button type="submit" class="btn btn-primary btn--lg w-100">Place Order</button>
+                    </form>
+                    <div style="margin-top: 1rem;" class="return">
+                        <a style="text-decoration: none;" href="">
+                            <i class="fa-solid fa-chevron-left"></i>
+                            Return Cart
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="right col-lg-6">
+
+                @foreach (BasketItem item in Model.BasketItems)
+                {
+                    <div class="item">
+                        <div class="image">
+                            <img src="~/images/products/@item.Product.ProductImages.FirstOrDefault(p=>p.IsMain==true)?.Path" alt="">
+                        </div>
+                        <div class="name-color">
+                            <div class="name"><span>@item.Product.Name</span></div>
+                            <div class="color">
+                                <span>
+                                    @foreach (var items in sizecolor)
+                                    {
+
+                                        var productSizeColors = items.ProductSizeColors.Where(psc => psc.ProductId == item.Product.Id);
+                                        foreach (var itemsr in productSizeColors)
+                                        {
+                                            @itemsr.Color.Name
+                                            ;
+                                        }
+                                    } /
+                                    @foreach (var items in sizecolor)
+                                    {
+
+                                        var productSizeColors = items.ProductSizeColors.Where(psc => psc.ProductId == item.Product.Id);
+                                        foreach (var itemsr in productSizeColors)
+                                        {
+                                            @itemsr.Size.Name
+                                            ;
+                                        }
+                                    }
+                                </span>
+                            </div>
+                        </div>
+                        <div class="price"><span>₼@item.Product.Price</span></div>
+                    </div>
+                }
+               
+                <div style="display:flex;justify-content: space-between;" class="subtotal">
+                    <div class="total"><span>Total</span></div>
+                    <div class="price"><span id="azn">AZN</span><span>₼@layoutService.ShowBasket().TotalPrice</span></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+
+

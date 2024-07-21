@@ -1,0 +1,37 @@
+﻿@model IEnumerable<Size>
+
+<p>
+    <a style="
+    /* position: relative; */
+    /* position: absolute; */
+    position: relative;
+    top: 5rem;
+    left: 3rem;
+    display: block;
+    width: max-content;
+" asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                Sizes
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+                <td>
+                    <a class="btn btn-warning"asp-action="Edit" asp-route-id="@item.Id">Edit</a>
+                    <a class="btn btn-danger" asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

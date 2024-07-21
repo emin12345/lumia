@@ -1,0 +1,115 @@
+main .container .row {
+    margin-top: 5rem;
+}
+
+    main .container .row .left {
+        display: flex;
+        justify-content: flex-end;
+    }
+
+    main .container .row .right {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+    }
+
+        main .container .row .right .head {
+            margin-left: 3rem;
+            text-align: center;
+        }
+
+            main .container .row .right .head span {
+                font-size: 11px;
+                color: gray;
+            }
+
+            main .container .row .right .head h6 {
+                font-weight: bold;
+                font-size: 25px;
+            }
+
+        main .container .row .right .input {
+            margin-top: 1rem;
+            margin-left: 13.5rem;
+        }
+
+            main .container .row .right .input label {
+                font-size: 11px;
+                font-weight: 600;
+            }
+
+            main .container .row .right .input input {
+                width: 100%;
+                margin-bottom: 1rem;
+                border-top: none;
+                border-left: none;
+                border-right: none;
+                border-bottom: 1px solid #d6d6d6;
+            }
+
+                main .container .row .right .input input::placeholder {
+                    font-size: 13px;
+                    opacity: 0.8;
+                }
+
+@media screen and (max-width: 992px) {
+    main .container .row {
+        flex-wrap: nowrap;
+        width: 53%;
+    }
+
+        main .container .row .left .image img {
+            width: 300px !important;
+        }
+
+        main .container .row .right .input {
+            margin-top: 1rem;
+            margin-left: 6.5rem;
+        }
+
+    footer {
+        margin-top: 3rem;
+    }
+}
+
+@media screen and (max-width: 399px) {
+    main .container .row {
+        flex-wrap: nowrap;
+        width: 53%;
+    }
+
+        main .container .row .left .image img {
+            width: 180px !important;
+        }
+
+        main .container .row .right span {
+            margin-left: 0rem !important;
+        }
+
+        main .container .row .right .input form input {
+            width: 100%;
+        }
+
+        main .container .row .right .input form .btn-primary {
+            width: 100% !important;
+        }
+
+        main .container .row .right .head {
+            margin-left: 0rem;
+            text-align: inherit !important;
+        }
+
+            main .container .row .right .head h6 {
+                font-size: 15px;
+            }
+
+            main .container .row .right .head span {
+                font-size: 10px;
+            }
+
+        main .container .row .right .input {
+            margin-top: 1rem;
+            margin-left: 0rem;
+        }
+}
+/*# sourceMappingURL=login.css.map */

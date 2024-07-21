@@ -1,0 +1,24 @@
+﻿@model Product
+<style>
+    .container-fluid{
+        justify-content:center;
+        align-items:center;
+    }
+</style>
+<h2>
+    The Product you want to delete: @Model.Name
+</h2>
+
+<form method="post" asp-action="DeleteConfirmed" asp-route-id="@Model.Id">
+    <div class="form-group">
+        <p>
+            Are you sure you want to delete the Product?
+        </p>
+        <button type="submit" class="btn btn-danger">
+            Yes, Delete
+        </button>
+        <a asp-action="Index" class="btn btn-primary">
+            No, Go Back
+        </a>
+    </div>
+</form>

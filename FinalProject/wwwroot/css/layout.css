@@ -1,0 +1,62 @@
+﻿@media screen and (max-width: 992px){
+   #res{
+       display:none
+   }
+}
+
+@media screen and (max-width: 399px) {
+    main #sizecolor .container .row .col-lg-3 .wrapper .sizecolor {
+        bottom: -73% !important;
+    }
+    #respons{
+        width: 100% !important
+    }
+    #resprice{
+        display:none !important
+    }
+}
+
+
+
+
+@keyframes activeDot {
+    0%, 100% {
+        transform: scaleY(1);
+    }
+
+    25% {
+        transform: scaleY(0.75);
+    }
+}
+
+@keyframes inactiveDot {
+    0%, 100% {
+        transform: scaleX(1) scaleY(1);
+    }
+
+    25% {
+        transform: scaleX(0.85) scaleY(1.25);
+    }
+}
+
+@keyframes chevronEnterFirst {
+    0% {
+        opacity: 0;
+        transform: rotate(0);
+    }
+
+    100% {
+        transform: rotate(45deg);
+    }
+}
+
+@keyframes chevronEnterSecond {
+    0% {
+        opacity: 0;
+        transform: rotate(0);
+    }
+
+    100% {
+        transform: rotate(-45deg);
+    }
+}

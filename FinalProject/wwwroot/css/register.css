@@ -1,0 +1,48 @@
+@media screen and (max-width: 992px) {
+  main .container .row {
+    flex-wrap: nowrap;
+    width: 53%;
+  }
+  main .container .row .left .image img {
+    width: 300px !important;
+  }
+  main .container .row .right .input {
+    margin-top: 1rem;
+    margin-left: 6.5rem;
+  }
+  footer {
+    margin-top: 3rem;
+  }
+}
+@media screen and (max-width: 399px) {
+  main .container .row {
+    flex-wrap: nowrap;
+    width: 53%;
+  }
+  main .container .row .left .image img {
+    width: 180px !important;
+  }
+  main .container .row .right span {
+    margin-left: 0rem !important;
+  }
+  main .container .row .right .input form input {
+    width: 100%;
+  }
+  main .container .row .right .input form .btn-primary {
+    width: 100% !important;
+  }
+  main .container .row .right .head {
+    margin-left: 0rem;
+    text-align: inherit !important;
+  }
+  main .container .row .right .head h6 {
+    font-size: 15px;
+  }
+  main .container .row .right .head span {
+    font-size: 10px;
+  }
+  main .container .row .right .input {
+    margin-top: 1rem;
+    margin-left: 0rem;
+  }
+}/*# sourceMappingURL=register.css.map */

@@ -1,0 +1,132 @@
+﻿@model IEnumerable<Blog>
+<style>
+    #create {
+        position: relative;
+        width: 100px;
+        top: 5rem;
+        left: 1rem;
+        display: block;
+        text-decoration: none;
+        transition: 0.3s;
+        margin-bottom: 5rem;
+    }
+
+    #create {
+        transition: 0.3s;
+        text-decoration: none;
+    }
+    tbody{
+        position: relative;
+        right: 9rem;
+        top: 3rem;
+    }
+
+    #pagination {
+        position: relative;
+        top: 43rem;
+        right: 61rem;
+    }
+</style>
+<p>
+    <a id="create" asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                Image
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CreatedTime)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Description)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Text)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                <td>
+                    <img style="width:150px;height:150px;object-fit:contain" src="/images/blogs/@item.ImagePath">
+                </td>
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CreatedTime)
+            </td>
+            <td>
+                    @{
+                        string desc = item.Description;
+                        if (desc.Length > 15)
+                        {
+                            desc = desc.Substring(0, 15) + "...";
+                        }
+                    }
+
+                    @Html.DisplayFor(modelItem => desc)
+            </td>
+            <td>
+                    @{
+                        string text = item.Text;
+                        if (text.Length > 15)
+                        {
+                            text = text.Substring(0, 15) + "...";
+                        }
+                    }
+
+                    @Html.DisplayFor(modelItem => text)
+
+            </td>
+            <td>
+                    <a class="btn btn-warning" asp-action="Edit" asp-route-id="@item.Id">Edit</a>
+                    <a class="btn btn-danger" asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+
+                    <button class="btn btn-secondary">
+                        <a style="text-decoration:none;color:black" asp-controller="Blog" asp-action="Comments" asp-route-BlogId="@item.Id">
+                            Comments(@(item.BlogComments != null ? item.BlogComments.Count : 0))
+                        </a>
+
+                    </button>
+                    @if (item.Accept==false)
+                    {
+                        <a class="btn btn-success" asp-action="AcceptBlog" asp-route-id="@item.Id">Accept</a>
+                    }
+                    else
+                    {
+                        <a class="btn btn-danger" asp-action="RejectBlog" asp-route-id="@item.Id">Reject</a>
+                    }
+                </td>
+        </tr>
+}
+    </tbody>
+</table>
+
+
+<nav id="pagination" class="mt-3 d-flex justify-content-center" aria-label="...">
+    <ul class="pagination">
+        <li class="page-item  @(ViewBag.CurrentPage == 1 ? "disabled" : "")">
+            <a class="page-link" asp-action="Index" asp-route-page="@(ViewBag.CurrentPage-1)" tabindex="-1">Previous</a>
+        </li>
+        @for (int i = 1; i <= ViewBag.TotalPage; i++)
+        {
+            <li class="page-item @(i==ViewBag.CurrentPage ? "active pointerNone" : "")">
+                <a class="page-link" asp-action="Index" asp-route-page="@i">@i</a>
+            </li>
+        }
+
+        <li class="page-item @(ViewBag.TotalPage == ViewBag.CurrentPage ? "disabled" : "")">
+            <a class="page-link" asp-action="Index" asp-route-page="@(ViewBag.CurrentPage+1)">Next</a>
+        </li>
+    </ul>
+</nav>

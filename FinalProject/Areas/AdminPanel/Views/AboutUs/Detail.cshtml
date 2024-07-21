@@ -1,0 +1,50 @@
+﻿@model FinalProject.Entities.AboutUs
+<style>
+    #div{
+            position: relative;
+    top: 10rem;
+
+    }
+</style>
+<div id="div">
+    <h4>AboutUs</h4>
+    <hr />
+    <dl class="row">
+        <dt class = "col-sm-2">
+            Image
+        </dt>
+        <dd class = "col-sm-10">
+            <img style="width:150px;height:150px;object-fit:contain" src="/images/aboutus/@Model.ImagePath">
+
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Text)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Text)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Author)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Author)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.IframeLink)
+        </dt>
+        <dd  class = "col-sm-10">
+            @Html.Raw(@Model.IframeLink);
+
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model?.Id">Edit</a> |
+    <a asp-action="Index" style="
+    width: 100px;
+    position: relative;
+    top: 8rem;
+    right: 6rem;
+    display: block;
+">Back to List</a>
+</div>

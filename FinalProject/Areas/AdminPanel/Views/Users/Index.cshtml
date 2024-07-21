@@ -1,0 +1,94 @@
+﻿@model IEnumerable<IdentityUser>
+
+<style>
+    #pagination {
+        position: relative;
+        top: 42rem;
+        right: 43rem;
+    }
+</style>
+
+
+<table class="table">
+    <thead style="    position: relative;
+    top: 5rem;">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.UserName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Email)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.PhoneNumber)
+            </th>
+            <th>
+                Status
+            </th>
+        </tr>
+    </thea>
+    <tbody style="    position: relative;
+    top: 2rem;">
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.UserName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Email)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.PhoneNumber)
+                </td>
+                <td>
+                        @if (item.LockoutEnd ==null)
+                        {
+                        <span>User Not Blocked</span>
+                        }
+
+                        @if (item.LockoutEnd == DateTimeOffset.MaxValue)
+                        {
+                        <span>User Blocked</span>
+                        }
+                      
+
+
+                </td>
+                <td>
+                    <a asp-controller="Users" asp-action="BlockUser" asp-route-userId="@item.Id">
+                        <div class="btn btn-danger">
+                            <button style="background:transparent;border:none" type="submit">Block User</button>
+                        </div>
+                  </a>      
+                </td>
+                <td>
+                    <a asp-controller="Users" asp-action="NotBlockUser" asp-route-userId="@item.Id">
+                        <div class="btn btn-success">
+                            <button style="background:transparent;border:none" type="submit">Unblock the user</button>
+                        </div>
+                    </a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+
+<nav id="pagination" class="mt-3 d-flex justify-content-center" aria-label="...">
+    <ul class="pagination">
+        <li class="page-item  @(ViewBag.CurrentPage == 1 ? "disabled" : "")">
+            <a class="page-link" asp-action="Index" asp-route-page="@(ViewBag.CurrentPage-1)" tabindex="-1">Previous</a>
+        </li>
+        @for (int i = 1; i <= ViewBag.TotalPage; i++)
+        {
+            <li class="page-item @(i==ViewBag.CurrentPage ? "active pointerNone" : "")">
+                <a class="page-link" asp-action="Index" asp-route-page="@i">@i</a>
+            </li>
+        }
+
+        <li class="page-item @(ViewBag.TotalPage == ViewBag.CurrentPage ? "disabled" : "")">
+            <a class="page-link" asp-action="Index" asp-route-page="@(ViewBag.CurrentPage+1)">Next</a>
+        </li>
+    </ul>
+</nav>

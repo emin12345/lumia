@@ -1,0 +1,138 @@
+main {
+  background-color: #f6f6f6;
+}
+main .container .row .header h6 {
+  text-align: center;
+  margin-top: 5rem;
+  font-size: 30px;
+  font-weight: bold;
+}
+main .container .row .blogs .container .row .col-lg-12 {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 4rem;
+}
+main .container .row .blogs .container .row .col-lg-12 .image {
+  cursor: pointer;
+  position: relative;
+  width: 343px;
+  border-radius: 12px;
+  overflow: hidden;
+  height: 275px;
+  transition: 0.3s;
+}
+main .container .row .blogs .container .row .col-lg-12 .image img {
+  height: 100%;
+  width: 100%;
+  object-fit: cover;
+}
+main .container .row .blogs .container .row .col-lg-12 .image .datetime {
+  width: 68px;
+  height: 68px;
+  position: absolute;
+  top: 0;
+  background: white;
+  border-radius: 12px;
+  margin: 20px;
+}
+main .container .row .blogs .container .row .col-lg-12 .image .datetime .time {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+main .container .row .blogs .container .row .col-lg-12 .image .datetime .time span {
+  text-align: center;
+  font-weight: 500;
+  color: #0067ff;
+}
+main .container .row .blogs .container .row .col-lg-12 .image .datetime .time span:nth-child(1) {
+  font-weight: bold;
+  font-size: 19px;
+}
+main .container .row .blogs .container .row .col-lg-12 .title {
+  padding: 40px;
+}
+main .container .row .blogs .container .row .col-lg-12 .title .head {
+  margin-bottom: 1rem;
+}
+main .container .row .blogs .container .row .col-lg-12 .title .head a {
+  text-decoration: none;
+  color: black;
+  transition: 0.3s;
+  font-weight: bold;
+  font-size: 21px;
+}
+main .container .row .blogs .container .row .col-lg-12 .title .head a:hover {
+  color: #0067ff;
+}
+main .container .row .blogs .container .row .col-lg-12 .title .content {
+  margin-bottom: 2rem;
+}
+main .container .row .blogs .container .row .col-lg-12 .title .content span {
+  display: block;
+  width: 500px;
+}
+main .container .row .blogs .container .row .col-lg-12 .title .comment-button {
+  display: flex;
+  justify-content: space-between;
+}
+main .container .row .blogs .container .row .col-lg-12 .title .comment-button .comment {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+main .container .row .blogs .container .row .col-lg-12 .title .comment-button .comment svg {
+  margin-right: 5px;
+  margin-top: 3px;
+}
+main .container .row .blogs .container .row .col-lg-12 .title .comment-button .comment a {
+  text-decoration: none;
+  color: black;
+  display: flex;
+  font-size: 12px;
+}
+main .container .row .blogs .container .row .col-lg-12 .title .comment-button .btn-primary {
+  width: 150px;
+  height: 40px;
+  font-size: 14px;
+  font-weight: 500;
+  border-radius: 20px;
+}
+main .container .row .blogs .container .row .col-lg-12 .title .comment-button .btn-primary a {
+  text-decoration: none;
+  color: white;
+  display: flex;
+  height: 100%;
+  align-items: center;
+  justify-content: center;
+}
+main .container .row .blogs .container .row .col-lg-12 .title .date {
+  margin-bottom: 1rem;
+}
+main .container .row .blogs .container .row .col-lg-12 .title .date span {
+  font-weight: 700;
+}
+
+@media screen and (max-width: 992px) {
+  main .container .row .blogs .container .row .col-lg-12 {
+    align-items: center;
+  }
+  main .container .row .blogs .container .row .col-lg-12 .title {
+    padding: 30;
+  }
+  main .container .row .blogs .container .row .col-lg-12 .title .content span {
+    width: 280px;
+  }
+}
+@media screen and (max-width: 399px) {
+  main .container .row .blogs .container .row .col-lg-12 {
+    flex-direction: column;
+  }
+  main .container .row .blogs .container .row .col-lg-12 .title .date {
+    text-align: center;
+  }
+  main .container .row .blogs .container .row .col-lg-12 .title .content {
+    text-align: center;
+  }
+}/*# sourceMappingURL=blog.css.map */

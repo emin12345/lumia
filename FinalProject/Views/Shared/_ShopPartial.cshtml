@@ -1,0 +1,213 @@
+﻿@using FinalProject.Entities;
+@model List<Product>
+
+
+<head>
+    <link rel="stylesheet" href="~/css/layout.css">
+</head>
+<style>
+   #productsfilter{
+       height:auto !important;
+   }
+</style>
+@foreach (var item in Model)
+{
+    <div data-price="" class="col-lg-3 col-md-6 col-sm-6 animate__animated animate__fadeIn">
+        <div class="wrapper">
+            <div class="header">
+                <div class="productname">
+                    @item.Name
+                </div>
+
+            </div>
+            <div class="images">
+                <div class="image">
+                  <a asp-controller="Product" asp-action="Detail" asp-route-id="@item.Id">
+                        <img src="~/images/products/@item.ProductImages.FirstOrDefault(p=>p.IsMain==true)?.Path" alt="">
+                  </a>
+                </div>
+                <div class="hover-image">
+                    <img src="~/images/products/@item.ProductImages.FirstOrDefault(p=>p.IsMain==false)?.Path" alt="">
+                </div>
+            </div>
+            <div class="minidesc">
+                <span>@item.MiniDesc</span>
+            </div>
+            <div class="rating">
+                <ul style="list-style-type: none;">
+                    <li>
+                        <i class="fa-solid fa-star"></i>
+                    </li>
+                    <li>
+                        <i class="fa-solid fa-star"></i>
+                    </li>
+                    <li>
+                        <i class="fa-solid fa-star"></i>
+                    </li>
+                    <li>
+                        <i class="fa-solid fa-star"></i>
+                    </li>
+                    <li>
+                        <i class="fa-solid fa-star"></i>
+                    </li>
+                </ul>
+            </div>
+            <div class="sizecolor">
+                <div class="headersizecolor"><span>@item.MiniDesc</span></div>
+                <div class="sizeselect ">
+                    <span>Size</span><br>
+                    <select class="form-select" name="" id="">
+                        @foreach (var size in Model)
+                        {
+                            var distinctSizes = size.ProductSizeColors
+                            .Where(x => x.ProductId == item.Id)
+                            .Select(x => x.Size.Name)
+                            .Distinct();
+
+                            foreach (var distinctSize in distinctSizes)
+                            {
+                                <option value="@distinctSize">@distinctSize</option>
+                            }
+                        }
+                    </select>
+                </div>
+                <div class="colorselect">
+                    <span>Color</span><br>
+                    <select class="form-select" name="" id="">
+                        @foreach (var color in Model)
+                        {
+                            var distinctColors = color.ProductSizeColors
+                            .Where(x => x.ProductId == item.Id)
+                            .Select(x => x.Color.Name)
+                            .Distinct();
+
+                            foreach (var distinctColor in distinctColors)
+                            {
+                                <option value="@distinctColor">@distinctColor</option>
+                            }
+                        }
+                    </select>
+                </div>
+
+                <div class="btn btn-primary">
+                    <a style="text-decoration:none;color:white" asp-controller="Product" asp-action="AddBasket" asp-route-id="@item.Id">
+                        Add To Cart
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div id="resprice" style="
+                 position: relative;
+    bottom: 26.2rem;
+    left: 12rem;
+    z-index: 1;
+    display:initial
+          " class="price">
+            @item.Price$
+        </div>
+
+    </div>
+}
+<nav id="pagination" class="mt-3 d-flex justify-content-center" aria-label="...">
+    <ul class="pagination">
+        <li class="page-item  @(ViewBag.CurrentPage == 1 ? "disabled" : "")">
+            <a class="page-link" asp-action="Index" asp-route-page="@(ViewBag.CurrentPage-1)" tabindex="-1">Previous</a>
+        </li>
+        @for (int i = 1; i <= ViewBag.TotalPage; i++)
+        {
+            <li class="page-item @(i==ViewBag.CurrentPage ? "active pointerNone" : "")">
+                <a class="page-link" asp-action="Index" asp-route-page="@i">@i</a>
+            </li>
+        }
+
+        <li class="page-item @(ViewBag.TotalPage == ViewBag.CurrentPage ? "disabled" : "")">
+            <a class="page-link" asp-action="Index" asp-route-page="@(ViewBag.CurrentPage+1)">Next</a>
+        </li>
+    </ul>
+</nav>
+
+
+
+<script>
+
+    function removeItem(id) {
+        fetch(`/Product/RemoveBasketItem/${id}`, {
+            method: 'DELETE',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            credentials: 'same-origin'
+        })
+            .then(response => response.text())
+            .then(data => {
+                console.log(data);
+                updateBasketView();
+            })
+            .catch(error => {
+                console.error(error);
+            });
+    }
+
+    function addBasket(id) {
+        fetch(`/Product/AddBasket/${id}`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            credentials: 'same-origin'
+        })
+            .then(response => response.text())
+            .then(data => {
+                console.log(data);
+                updateBasketView();
+            })
+            .catch(error => {
+                console.error(error);
+            });
+    }
+
+    function updateBasketView() {
+        var basketContainer = document.getElementById('basketContainer');
+        fetch('/Product/ShowBasket')
+            .then(response => response.json())
+            .then(data => {
+                let design = '';
+                data.basketItems.forEach((item) => {
+
+                    design += '<div class="cart-box">' +
+                        '<img style="margin-left: 0;margin-top:0;" src="/images/products/' + item.product.basketPhoto + '" alt="" class="cart-img">' +
+                        '<div class="detail-box">' +
+                        '<div class="cart-product-title">' + item.product.name + '</div>' +
+                        '<div class="sizecolor">' +
+                        '<div class="size" style="font-size: 12px;">Size: M</div>' +
+                        '<div class="color" style="font-size: 12px;">Color: Green</div>' +
+                        '</div>' +
+                        '<div class="dflex" style="display: flex;justify-content: space-between;align-items: center;">' +
+                        '<div style="width: auto;" class="cart-price">₼' + item.product.price + '</div>' +
+                        '<input style="width: 40%;" class="form-control" type="number" value="' + item.count + '" min="0">' +
+                        '</div>' +
+                        '</div>' +
+                        '<a asp-controller="Product" onclick="removeItem(' + item.product.id + ')">' +
+                        '<svg  style="position: relative;right: 15px;" stop-color="" width="13" height="15" viewBox="0 0 13 15" fill="none" xmlns="http://www.w3.org/2000/svg">' +
+                        '<path fill-rule="evenodd" clip-rule="evenodd" d="M4.51923 1.23798C4.6716 1.0856 4.87826 1 5.09375 1H7.71875C7.93424 1 8.1409 1.0856 8.29327 1.23798C8.44565 1.39035 8.53125 1.59701 8.53125 1.8125V2.625H4.28125V1.8125C4.28125 1.59701 4.36685 1.39035 4.51923 1.23798ZM3.28125 2.625V1.8125C3.28125 1.33179 3.47221 0.870778 3.81212 0.530869C4.15203 0.190959 4.61304 0 5.09375 0H7.71875C8.19946 0 8.66047 0.190959 9.00038 0.530869C9.34029 0.870778 9.53125 1.33179 9.53125 1.8125V2.625H11H12.3125C12.5886 2.625 12.8125 2.84886 12.8125 3.125C12.8125 3.40114 12.5886 3.625 12.3125 3.625H11.5V12.3125C11.5 12.7932 11.309 13.2542 10.9691 13.5941C10.6292 13.934 10.1682 14.125 9.6875 14.125H3.125C2.64429 14.125 2.18328 13.934 1.84337 13.5941C1.50346 13.2542 1.3125 12.7932 1.3125 12.3125V3.625H0.5C0.223858 3.625 0 3.40114 0 3.125C0 2.84886 0.223858 2.625 0.5 2.625H1.8125H3.28125ZM2.3125 3.625V12.3125C2.3125 12.528 2.3981 12.7347 2.55048 12.887C2.70285 13.0394 2.90951 13.125 3.125 13.125H9.6875C9.90299 13.125 10.1097 13.0394 10.262 12.887C10.4144 12.7347 10.5 12.528 10.5 12.3125V3.625H9.03125H3.78125H2.3125ZM5.09375 5.90625C5.36989 5.90625 5.59375 6.13011 5.59375 6.40625V10.3438C5.59375 10.6199 5.36989 10.8438 5.09375 10.8438C4.81761 10.8438 4.59375 10.6199 4.59375 10.3438V6.40625C4.59375 6.13011 4.81761 5.90625 5.09375 5.90625ZM8.21875 6.40625C8.21875 6.13011 7.99489 5.90625 7.71875 5.90625C7.44261 5.90625 7.21875 6.13011 7.21875 6.40625V10.3438C7.21875 10.6199 7.44261 10.8438 7.71875 10.8438C7.99489 10.8438 8.21875 10.6199 8.21875 10.3438V6.40625Z" fill="gray"></path>' +
+                        '</a>' +
+                        '</div>'
+                        ;
+
+
+
+
+
+                });
+
+
+
+                basketContainer.innerHTML = design;
+            })
+            .catch(error => {
+                console.error(error);
+            });
+    }
+
+
+</script>

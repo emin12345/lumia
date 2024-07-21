@@ -1,0 +1,29 @@
+﻿@using FinalProject.Entities;
+@model List<Blog>
+@foreach(var item in Model){
+    <div style="display:flex;justify-content:center" class="col-lg-4 col-md-6 hidden">
+        <div class="item">
+            <div class="image">
+                <a asp-controller="Blog" asp-action="Detail" asp-route-id="@item.Id"><img src="~/images/blogs/@item.ImagePath" alt=""></a>
+                <div class="datetime">
+                    @{
+                        string createdTimeFormatted = item.CreatedTime.ToString("MMM d, yyyy");
+                        string day = item.CreatedTime.ToString("dd");
+                        string month = item.CreatedTime.ToString("MMM");
+                    }
+                    <div class="time">
+                        <span>@day</span>
+                        <span>@month</span>
+                    </div>
+                </div>
+            </div>
+            <div style="text-align:center" class="name">
+                <h6>@item.Name</h6>
+            </div>
+            <div class="date-posted">
+                <div class="date"><strong>Date:</strong><span>@item.CreatedTime.ToString("MMM d,yyyy")</span></div>
+                <div class="posted"><strong>Posted By:</strong><span>Admin</span></div>
+            </div>
+        </div>
+    </div>
+}

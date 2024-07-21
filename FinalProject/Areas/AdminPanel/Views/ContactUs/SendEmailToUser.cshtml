@@ -1,0 +1,30 @@
+﻿<style>
+
+    form{
+        margin-top: 14rem;
+    }
+</style>
+@model AdminMessageVM
+<head>
+    <title>Admin Message</title>
+</head>
+<body>
+    <h1>Admin Message</h1>
+
+    <form method="post" asp-action="SendEmailToUser">
+        <label   asp-for="RecipientEmail">Recipient Email:</label>
+        <input class="form-control" asp-for="RecipientEmail" type="email" id="recipientEmail" name="RecipientEmail" required><br><br>
+
+        <label asp-for="Message" for="message">Message:</label>
+        <textarea class="form-control" asp-for="Message" id="message" name="Message" rows="4" required></textarea><br><br>
+
+        <div class="btn btn-primary">
+            <input style="
+    background: transparent;
+    border: none;
+    color: white;
+" type="submit" value="Send Message">
+        </div>
+    </form>
+</body>
+</html>
