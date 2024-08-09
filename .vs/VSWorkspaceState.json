@@ -1,8 +1,12 @@
 {
   "ExpandedNodes": [
     "",
-    "\\FinalProject"
+    "\\FinalProject",
+    "\\FinalProject\\Areas",
+    "\\FinalProject\\Areas\\AdminPanel",
+    "\\FinalProject\\Controllers",
+    "\\FinalProject\\DAL"
   ],
-  "SelectedNode": "\\FinalProject\\Program.cs",
+  "SelectedNode": "\\FinalProject\\Controllers\\AboutUsController.cs",
   "PreviewInSolutionExplorer": false
 }
